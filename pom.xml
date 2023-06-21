@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>world.sc2</groupId>
-    <artifactId>ShadowcraftRelics</artifactId>
+    <artifactId>shadowcraftrelics</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -17,6 +17,7 @@
     </properties>
 
     <build>
+        <finalName>${name} v${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
