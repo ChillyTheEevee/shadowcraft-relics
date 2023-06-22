@@ -1,0 +1,13 @@
+# Edit properties specific to the Simon Obliterator relic
+
+displayName: Simon Obliterator
+
+uniqueProperties:
+
+  simonDamageMultiplier: 3.0f
+  annoyingPersonDamageMultiplier: 1.5f
+
+  simonUUID: 12a99e82-fce0-4e4a-b532-945820ef45fc # Stwigz
+  annoyingPeopleUUIDs:
+    - a5abf1fb-3bc1-4541-bee4-fce4ca9987a6 # EdgeScammer
+    - filleruu-idasjhdaa-asjk-asdjhajsdhak # Add Brian's account here eventually

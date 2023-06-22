@@ -1,0 +1,5 @@
+# "True" means a relic is enabled, "False" means that a relic is disabled and will not function.
+
+enabledRelics:
+
+  simonObliterator: True
