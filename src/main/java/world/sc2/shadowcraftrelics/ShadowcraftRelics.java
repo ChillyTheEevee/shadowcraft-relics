@@ -3,7 +3,6 @@ package world.sc2.shadowcraftrelics;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.config.ConfigUpdater;
-import world.sc2.shadowcraftrelics.listeners.EntityDamageListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,13 +16,6 @@ public final class ShadowcraftRelics extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         plugin = this;
-
-        // Setup and update configs
-        saveAndUpdateConfig("enabledRelics.yml");
-        saveAndUpdateConfig("relicProperties/simonObliterator.yml");
-
-        // Register listeners
-        getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
     }
 
     @Override
