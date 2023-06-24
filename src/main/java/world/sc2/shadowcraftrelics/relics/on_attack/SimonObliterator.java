@@ -5,10 +5,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import world.sc2.shadowcraftrelics.config.ConfigManager;
-import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
 import java.util.List;
@@ -23,6 +20,7 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
     public SimonObliterator(int id, String name) {
         super(id, name, "relicProperties/simonObliterator.yml");
 
+        // Relic-specific properties
         simonDamageMultiplier = (float)
                 config.get().getDouble("uniqueProperties.simonDamageMultiplier");
         annoyingDamageMultiplier = (float)
@@ -32,12 +30,7 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
         annoyingPeopleUUIDs = config.get().getStringList("uniqueProperties.annoyingPeopleUUIDs");
     }
 
-    @Override
-    public boolean isEnabled() {
-        return ConfigManager.getInstance().getConfig("enabledRelics.yml").get()
-                .getBoolean("enabledRelics.simonObliterator");
-    }
-
+    // TODO make material a config option
     @Override
     public @NotNull Material getMaterial() {
         return Material.STONE_AXE;
@@ -51,16 +44,11 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
             return false;
 
         EntityEquipment equipment = attacker.getEquipment();
-        if (equipment == null)
-            return false;
-
-        ItemStack weapon = equipment.getItemInMainHand();
-        return !RelicManager.getInstance().isRelic(weapon, getName());
+        return equipment != null;
     }
 
     @Override
     public void onAttack(EntityDamageByEntityEvent event) {
-
         Player hitPlayer = (Player) event.getEntity();
         String hitPlayerUUID = hitPlayer.getUniqueId().toString();
 

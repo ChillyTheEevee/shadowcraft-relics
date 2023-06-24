@@ -12,8 +12,9 @@ public interface TriggerOnAttackRelic {
 
     /**
      * The check that must be run to decide whether a {@link TriggerOnAttackRelic}'s onAttack() method should be called.
-     * This method is called every time an {@link EntityDamageByEntityEvent} is thrown, and it is up to each
-     * implementation of {@code TriggerOnAttackRelic} to decide when onAttack() should be called.
+     * This method is called when an {@link EntityDamageByEntityEvent} is thrown and the item that the attacker is
+     * holding is an instance of the specified TriggerOnAttackRelic. Past that, it is up to each implementation of
+     * {@code TriggerOnAttackRelic} to decide when onAttack() should be called.
      * @param event The instance of EntityDamageByEntityEvent
      * @return true if onAttack(EntityDamageByEntityEvent event) should be called.
      */

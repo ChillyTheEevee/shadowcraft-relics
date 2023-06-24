@@ -2,3 +2,13 @@ name: ShadowcraftRelics
 version: '${project.version}'
 main: world.sc2.shadowcraftrelics.ShadowcraftRelics
 api-version: '1.19'
+commands:
+  createrelic:
+    description: Creates a relic (Debug command)
+    usage: /createrelic <relic_name>
+    permission: shadowcraftrelics.createrelic
+
+permissions:
+  shadowcraftrelics.createrelic:
+    description: Allows for usage of the /createrelic command
+    default: op

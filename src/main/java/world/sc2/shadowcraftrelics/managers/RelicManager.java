@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
@@ -18,20 +19,13 @@ import java.util.stream.Collectors;
 
 public class RelicManager {
 
-    private static RelicManager manager;
-
-    private static final NamespacedKey relicKey = new NamespacedKey(ShadowcraftRelics.getPlugin(), "relic_type");
+    private final NamespacedKey relicTypeKey = new NamespacedKey(ShadowcraftRelics.getPlugin(), "relic_type");
     private final BiMap<Integer, Relic> allRelics;
 
-    private RelicManager() {
+    public RelicManager() {
         allRelics = HashBiMap.create();
 
         registerRelics();
-    }
-
-    public static RelicManager getInstance() {
-        if (manager == null) manager = new RelicManager();
-        return manager;
     }
 
     private void registerRelics() {
@@ -58,24 +52,44 @@ public class RelicManager {
     }
 
     /**
-     * Tests if an {@link ItemStack} represents a {@link Relic}.
+     * Tests if an {@link ItemStack} represents an instance of this type of {@link Relic}.
      * @param item The item to test
-     * @param relicName The internal name of the Relic that is to be tested
+     * @param relic The relic to compare to
      * @return true if the item is the specified Relic
      */
-    public boolean isRelic(ItemStack item, String relicName) {
+    public boolean isRelic(ItemStack item, Relic relic) {
         if (ItemUtils.isAirOrNull(item))
-            return false;
-        Relic relic = getRelicFromName(relicName);
-        if (relic == null)
             return false;
 
         PersistentDataContainer itemContainer = item.getItemMeta().getPersistentDataContainer();
 
-        if (!itemContainer.has(relicKey))
+        if (!itemContainer.has(relicTypeKey))
             return false;
 
-        return !Objects.equals(itemContainer.get(relicKey, PersistentDataType.STRING), relic.getName());
+        return !Objects.equals(itemContainer.get(relicTypeKey, PersistentDataType.STRING), relic.getName());
+    }
+
+    /**
+     * Creates and returns an instance of an {@link ItemStack} that has the properties of a specified Relic relicName.
+     * relicName represents the internal name of a {@link Relic} as described by Relic.getName().
+     * @param relicName The name of a {@link Relic} as described by Relic.getName().
+     * @return An instance of an ItemStack with a Relic's special NBT Tag applied. This method will return null if
+     * relicName does not match a valid Relic.
+     */
+    // TODO make Relic have enchants on creation
+    // TODO create EnchantsSquared integration
+    // TODO make Relic match name on creation
+    public ItemStack createRelic(String relicName) {
+        Relic relic = getRelicFromName(relicName);
+        if (relic == null) return null;
+
+        ItemStack item = new ItemStack(relic.getMaterial(), 1);
+        ItemMeta itemMeta = item.getItemMeta();
+
+        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+        container.set(relicTypeKey, PersistentDataType.STRING, relic.getName());
+        item.setItemMeta(itemMeta);
+        return item;
     }
 
     public Collection<Relic> getRelicsMatchingFilter(Predicate<Relic> filter) {

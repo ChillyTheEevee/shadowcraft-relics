@@ -9,7 +9,6 @@ import world.sc2.shadowcraftrelics.managers.RelicManager;
 public abstract class Relic {
 
     protected final Config config;
-
     protected final String name;
     protected final int id;
 
@@ -44,13 +43,8 @@ public abstract class Relic {
     }
 
     /**
-     * @return Whether the Relic is enabled within the enabledRelics.yml config.
+     * @return The expected {@link Material} of the Relic.
      */
-    public abstract boolean isEnabled();
-
-    /**
-     * @return The expected {@link Material} of a Relic.
-     */
-    public abstract @NotNull Material getMaterial();
+    public abstract Material getMaterial();
 
 }

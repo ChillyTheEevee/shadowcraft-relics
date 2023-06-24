@@ -1,29 +1,40 @@
 package world.sc2.shadowcraftrelics;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import world.sc2.shadowcraftrelics.commands.CreateRelic;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.config.ConfigUpdater;
 import world.sc2.shadowcraftrelics.listeners.EntityDamageListener;
+import world.sc2.shadowcraftrelics.managers.RelicManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public final class ShadowcraftRelics extends JavaPlugin {
 
     private static ShadowcraftRelics plugin = null;
+
+    // Managers
+    private RelicManager relicManager;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         plugin = this;
 
+        // Create managers
+        relicManager = new RelicManager();
+
         // Setup and update configs
-        saveAndUpdateConfig("enabledRelics.yml");
         saveAndUpdateConfig("relicProperties/simonObliterator.yml");
 
         // Register listeners
-        getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
+        getServer().getPluginManager().registerEvents(new EntityDamageListener(relicManager), this);
+
+        // Register commands
+        Objects.requireNonNull(getCommand("createrelic")).setExecutor(new CreateRelic(relicManager));
     }
 
     @Override
@@ -54,7 +65,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
      * Updates a config by comparing in the plugin's assigned data folder by copying over data from the jar file
      * @param name The path to the config from the plugin's assigned data file
      */
-    private void updateConfig(String name){
+    private void updateConfig(String name) {
         File configFile = new File(getDataFolder(), name);
         try {
             ConfigUpdater.update(plugin, name, configFile, new ArrayList<>());
@@ -68,4 +79,5 @@ public final class ShadowcraftRelics extends JavaPlugin {
     public static ShadowcraftRelics getPlugin() {
         return plugin;
     }
+
 }
