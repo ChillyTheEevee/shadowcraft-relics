@@ -19,6 +19,13 @@ public abstract class Relic {
     }
 
     /**
+     * @return Whether the Relic is enabled within the Relic's respective config file.
+     */
+    public final boolean isEnabled() {
+        return config.get().getBoolean("isEnabled");
+    }
+
+    /**
      * @return The assigned ID of the Relic. This ID is assigned when the Relic is instantiated in {@link RelicManager}
      */
     public final int getId() {
