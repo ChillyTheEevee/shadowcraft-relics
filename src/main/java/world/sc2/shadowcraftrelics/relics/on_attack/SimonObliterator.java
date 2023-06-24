@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.jetbrains.annotations.NotNull;
+import world.sc2.shadowcraftrelics.config.Config;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
     private final String simonUUID;
     private final List<String> annoyingPeopleUUIDs;
 
-    public SimonObliterator(int id, String name) {
-        super(id, name, "relicProperties/simonObliterator.yml");
+    public SimonObliterator(int id, String name, Config config) {
+        super(id, name, config);
 
         // Relic-specific properties
         simonDamageMultiplier = (float)

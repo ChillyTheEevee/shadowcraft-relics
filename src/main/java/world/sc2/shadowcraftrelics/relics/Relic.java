@@ -3,7 +3,6 @@ package world.sc2.shadowcraftrelics.relics;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import world.sc2.shadowcraftrelics.config.Config;
-import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
 public abstract class Relic {
@@ -12,10 +11,10 @@ public abstract class Relic {
     protected final String name;
     protected final int id;
 
-    public Relic(int id, String name, String configPath) {
+    public Relic(int id, String name, Config config) {
         this.id = id;
         this.name = name.toLowerCase();
-        this.config = ConfigManager.getInstance().getConfig(configPath);
+        this.config = config;
     }
 
     /**

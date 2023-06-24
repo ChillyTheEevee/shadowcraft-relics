@@ -17,6 +17,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
     private static ShadowcraftRelics plugin = null;
 
     // Managers
+    private ConfigManager configManager;
     private RelicManager relicManager;
 
     @Override
@@ -25,7 +26,8 @@ public final class ShadowcraftRelics extends JavaPlugin {
         plugin = this;
 
         // Create managers
-        relicManager = new RelicManager();
+        configManager = new ConfigManager(plugin);
+        relicManager = new RelicManager(plugin, configManager);
 
         // Setup and update configs
         saveAndUpdateConfig("relicProperties/simonObliterator.yml");
@@ -57,7 +59,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
         File config = new File(this.getDataFolder(), name);
         if (!config.exists()){
             this.saveResource(name, false);
-            ConfigManager.getInstance().saveConfig(name);
+            configManager.saveConfig(name);
         }
     }
 
@@ -72,12 +74,6 @@ public final class ShadowcraftRelics extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // Getters
-
-    public static ShadowcraftRelics getPlugin() {
-        return plugin;
     }
 
 }

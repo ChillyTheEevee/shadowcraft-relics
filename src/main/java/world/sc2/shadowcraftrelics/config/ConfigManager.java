@@ -1,22 +1,17 @@
 package world.sc2.shadowcraftrelics.config;
 
+import world.sc2.shadowcraftrelics.ShadowcraftRelics;
+
 import java.util.HashMap;
 
 //All credit to spigotmc.org user Bimmr for this manager
 public class ConfigManager {
 
+    private final ShadowcraftRelics plugin;
     private final HashMap<String, Config> configs = new HashMap<>();
-    private static ConfigManager manager = null;
 
-    public ConfigManager() {
-
-    }
-
-    public static ConfigManager getInstance() {
-        if (manager == null) {
-            manager = new ConfigManager();
-        }
-        return manager;
+    public ConfigManager(ShadowcraftRelics plugin) {
+        this.plugin = plugin;
     }
 
     public HashMap<String, Config> getConfigs() {
@@ -25,7 +20,7 @@ public class ConfigManager {
 
     public Config getConfig(String name) {
         if (!configs.containsKey(name))
-            configs.put(name, new Config(name));
+            configs.put(name, new Config(plugin, name));
 
         return configs.get(name);
     }

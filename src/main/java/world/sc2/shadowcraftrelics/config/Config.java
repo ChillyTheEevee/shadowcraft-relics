@@ -13,9 +13,10 @@ public class Config {
     private final String name;
     private File file;
     private YamlConfiguration config;
-    private final ShadowcraftRelics plugin = ShadowcraftRelics.getPlugin();
+    private final ShadowcraftRelics plugin;
 
-    public Config(String name) {
+    public Config(ShadowcraftRelics plugin, String name) {
+        this.plugin = plugin;
         this.name = name;
     }
 

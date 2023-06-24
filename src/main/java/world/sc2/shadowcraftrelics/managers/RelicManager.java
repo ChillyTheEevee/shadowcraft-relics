@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
+import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.utils.ItemUtils;
@@ -19,17 +20,23 @@ import java.util.stream.Collectors;
 
 public class RelicManager {
 
-    private final NamespacedKey relicTypeKey = new NamespacedKey(ShadowcraftRelics.getPlugin(), "relic_type");
+    private final ConfigManager configManager;
+    private final NamespacedKey relicTypeKey;
     private final BiMap<Integer, Relic> allRelics;
 
-    public RelicManager() {
-        allRelics = HashBiMap.create();
+    public RelicManager(ShadowcraftRelics plugin, ConfigManager configManager) {
+        this.configManager = configManager;
 
+        // Create NamespacedKeys
+        relicTypeKey = new NamespacedKey(plugin, "relic_type");
+
+        allRelics = HashBiMap.create();
         registerRelics();
     }
 
     private void registerRelics() {
-        registerRelic(new SimonObliterator(1, "simon_obliterator"));
+        registerRelic(new SimonObliterator(1, "simon_obliterator",
+                configManager.getConfig("relicProperties/simonObliterator.yml")));
     }
 
     private void registerRelic(Relic relic) {
