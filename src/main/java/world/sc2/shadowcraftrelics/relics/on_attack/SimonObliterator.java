@@ -1,5 +1,6 @@
 package world.sc2.shadowcraftrelics.relics.on_attack;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -37,10 +38,10 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
 
     @Override
     public void onAttack(EntityDamageByEntityEvent event) {
-        Player hitPlayer = (Player) event.getEntity();
-        String hitPlayerUUID = hitPlayer.getUniqueId().toString();
+        Entity hitEntity = event.getEntity();
+        String hitEntityUUID = hitEntity.getUniqueId().toString();
 
-        if (hitPlayerUUID.equals(simonUUID)) {
+        if (hitEntityUUID.equals(simonUUID)) {
             event.setDamage(event.getDamage() * simonDamageMultiplier);
             if (event.getDamager() instanceof Player attacker) {
                 attacker.sendMessage("Hit Simon! Dealt catastrophic damage!");
@@ -49,7 +50,7 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
         }
 
         for (String annoyingPersonUUID : annoyingPeopleUUIDs) {
-            if (hitPlayerUUID.equals(annoyingPersonUUID)) {
+            if (hitEntityUUID.equals(annoyingPersonUUID)) {
                 event.setDamage(event.getDamage() * annoyingDamageMultiplier);
                 if (event.getDamager() instanceof Player attacker) {
                     attacker.sendMessage("Hit an annoying person! Dealt boosted damage!");
