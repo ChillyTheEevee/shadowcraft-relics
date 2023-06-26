@@ -1,6 +1,5 @@
 package world.sc2.shadowcraftrelics.relics;
 
-import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 import world.sc2.shadowcraftrelics.config.Config;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
@@ -47,10 +46,5 @@ public abstract class Relic {
     public final String getDisplayName() {
         return config.get().getString("displayName");
     }
-
-    /**
-     * @return The expected {@link Material} of the Relic.
-     */
-    public abstract Material getMaterial();
 
 }

@@ -1,11 +1,8 @@
 package world.sc2.shadowcraftrelics.relics.on_attack;
 
-import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.EntityEquipment;
-import org.jetbrains.annotations.NotNull;
 import world.sc2.shadowcraftrelics.config.Config;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
@@ -31,21 +28,11 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
         annoyingPeopleUUIDs = config.get().getStringList("uniqueProperties.annoyingPeopleUUIDs");
     }
 
-    // TODO make material a config option
-    @Override
-    public @NotNull Material getMaterial() {
-        return Material.STONE_AXE;
-    }
-
     @Override
     public boolean shouldTriggerFromEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player))
             return false;
-        if (!(event.getDamager() instanceof LivingEntity attacker))
-            return false;
-
-        EntityEquipment equipment = attacker.getEquipment();
-        return equipment != null;
+        return event.getDamager() instanceof LivingEntity;
     }
 
     @Override
