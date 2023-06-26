@@ -1,7 +1,6 @@
 package world.sc2.shadowcraftrelics;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import world.sc2.shadowcraftrelics.commands.CreateRelic;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.config.ConfigUpdater;
 import world.sc2.shadowcraftrelics.listeners.EntityDamageListener;
@@ -10,7 +9,6 @@ import world.sc2.shadowcraftrelics.managers.RelicManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public final class ShadowcraftRelics extends JavaPlugin {
 
@@ -36,7 +34,6 @@ public final class ShadowcraftRelics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityDamageListener(relicManager), this);
 
         // Register commands
-        Objects.requireNonNull(getCommand("createrelic")).setExecutor(new CreateRelic(relicManager));
     }
 
     @Override
