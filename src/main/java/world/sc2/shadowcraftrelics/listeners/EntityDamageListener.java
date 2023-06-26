@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnAttackRelic;
+import world.sc2.shadowcraftrelics.util.EntityUtils;
 
 import java.util.Objects;
 
@@ -29,9 +30,10 @@ public class EntityDamageListener implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
         // Direct attack relics
-        if (!(event.getDamager() instanceof LivingEntity attacker))
+        LivingEntity realAttacker = EntityUtils.getRealAttacker(event.getDamager());
+        if (realAttacker == null)
             return;
-        ItemStack weapon = Objects.requireNonNull(attacker.getEquipment()).getItemInMainHand();
+        ItemStack weapon = Objects.requireNonNull(realAttacker.getEquipment()).getItemInMainHand();
         for (Relic relic : relicManager.getRelicsMatchingFilter(r -> r instanceof TriggerOnAttackRelic)) {
             TriggerOnAttackRelic onAttackRelic = (TriggerOnAttackRelic) relic;
             if (relicManager.isRelic(weapon, relic) && onAttackRelic.shouldTriggerFromEntityDamageByEntityEvent(event)) {

@@ -11,7 +11,7 @@ import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
-import world.sc2.shadowcraftrelics.utils.ItemUtils;
+import world.sc2.shadowcraftrelics.util.ItemUtils;
 
 import java.util.Collection;
 import java.util.Objects;
