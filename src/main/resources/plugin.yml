@@ -3,12 +3,12 @@ version: '${project.version}'
 main: world.sc2.shadowcraftrelics.ShadowcraftRelics
 api-version: '1.19'
 commands:
-  createrelic:
-    description: Creates a relic (Debug command)
-    usage: /createrelic <relic_name>
-    permission: shadowcraftrelics.createrelic
+  giverelictag:
+    description: Gives the player's held item the tag specific to a given Relic
+    usage: /giverelictag <relic_name>
+    permission: shadowcraftrelics.giverelictag
 
 permissions:
-  shadowcraftrelics.createrelic:
-    description: Allows for usage of the /createrelic command
+  shadowcraftrelics.giverelictag:
+    description: Gives the player the ability to use the /giverelictag command
     default: op

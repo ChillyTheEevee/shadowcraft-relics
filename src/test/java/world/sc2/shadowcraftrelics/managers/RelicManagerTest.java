@@ -108,9 +108,9 @@ class RelicManagerTest {
         assertFalse(relicManager.isRelic(mockFakeSimonObliterator, mockSimonObliteratorRelic));
     }
 
-    @DisplayName("giveItemNBTTag(): If given real Relic and ItemStack item give item tag and return true")
+    @DisplayName("giveItemNBTTag(): If given real Relic and ItemStack item give item the Relic's special NBT Tag")
     @Test
-    void whenGiveItemNBTTag_ifRelicNameIsValid_thenGiveItemCorrectNBTTagAndReturnTrue() {
+    void whenGiveItemNBTTag_ifRelicNameIsValid_thenGiveItemCorrectNBTTag() {
 
         ItemStack stoneAxe = mock(ItemStack.class);
         ItemMeta stoneAxeMeta = mock(ItemMeta.class);
@@ -119,33 +119,10 @@ class RelicManagerTest {
         when(stoneAxe.getItemMeta()).thenReturn(stoneAxeMeta);
         when(stoneAxeMeta.getPersistentDataContainer()).thenReturn(stoneAxePDC);
 
-        assertTrue(relicManager.giveItemRelicNBTTag(stoneAxe, mockSimonObliteratorRelic));
+        relicManager.giveItemRelicNBTTag(stoneAxe, mockSimonObliteratorRelic);
 
         verify(stoneAxePDC).set(any(), eq(PersistentDataType.STRING), eq("simon_obliterator"));
         verify(stoneAxe).setItemMeta(stoneAxeMeta);
-    }
-
-    @DisplayName("giveItemNBTTag(): If given null Relic do nothing and return false")
-    @Test
-    void whenGiveItemNBTTag_ifRelicNameIsNull_thenDoNothingAndReturnFalse() {
-
-        ItemStack stoneAxe = mock(ItemStack.class);
-        ItemMeta stoneAxeMeta = mock(ItemMeta.class);
-        PersistentDataContainer stoneAxePDC = mock(PersistentDataContainer.class);
-
-        when(stoneAxe.getItemMeta()).thenReturn(stoneAxeMeta);
-        when(stoneAxeMeta.getPersistentDataContainer()).thenReturn(stoneAxePDC);
-
-        assertFalse(relicManager.giveItemRelicNBTTag(stoneAxe, null));
-
-        verify(stoneAxePDC, never()).set(any(), eq(PersistentDataType.STRING), eq("simon_obliterator"));
-        verify(stoneAxe, never()).setItemMeta(stoneAxeMeta);
-    }
-
-    @DisplayName("giveItemNBTTag(): If item is null then return false")
-    @Test
-    void whenGiveItemNBTTag_ifItemIsNull_thenReturnFalse() {
-        assertFalse(relicManager.giveItemRelicNBTTag(null, mockSimonObliteratorRelic));
     }
 
 }

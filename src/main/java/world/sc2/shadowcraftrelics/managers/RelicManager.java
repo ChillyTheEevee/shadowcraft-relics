@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
@@ -77,22 +78,15 @@ public class RelicManager {
     }
 
     /**
-     * If relicName is a valid name of a Relic
-     * @return true if the NBT Tag was successfully applied, false otherwise
+     * Applies a {@link Relic}'s NBT tag to the given {@link ItemStack}.
      */
 
-    public boolean giveItemRelicNBTTag(ItemStack item, Relic relic) {
-        if (item == null)
-            return false;
-        if (relic == null)
-            return false;
+    public void giveItemRelicNBTTag(@NotNull ItemStack item, @NotNull Relic relic) {
         ItemMeta itemMeta = item.getItemMeta();
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
 
         container.set(relicTypeKey, PersistentDataType.STRING, relic.getName());
         item.setItemMeta(itemMeta);
-
-        return true;
     }
 
     public Collection<Relic> getRelicsMatchingFilter(Predicate<Relic> filter) {
