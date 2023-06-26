@@ -73,30 +73,26 @@ public class RelicManager {
         if (!itemContainer.has(relicTypeKey))
             return false;
 
-        return !Objects.equals(itemContainer.get(relicTypeKey, PersistentDataType.STRING), relic.getName());
+        return Objects.equals(itemContainer.get(relicTypeKey, PersistentDataType.STRING), relic.getName());
     }
 
     /**
-     * Creates and returns an instance of an {@link ItemStack} that has the properties of a specified Relic relicName.
-     * relicName represents the internal name of a {@link Relic} as described by Relic.getName().
-     * @param relicName The name of a {@link Relic} as described by Relic.getName().
-     * @return An instance of an ItemStack with a Relic's special NBT Tag applied. This method will return null if
-     * relicName does not match a valid Relic.
+     * If relicName is a valid name of a Relic
+     * @return true if the NBT Tag was successfully applied, false otherwise
      */
-    // TODO make Relic have enchants on creation
-    // TODO create EnchantsSquared integration
-    // TODO make Relic match name on creation
-    public ItemStack createRelic(String relicName) {
-        Relic relic = getRelicFromName(relicName);
-        if (relic == null) return null;
 
-        ItemStack item = new ItemStack(relic.getMaterial(), 1);
+    public boolean giveItemRelicNBTTag(ItemStack item, Relic relic) {
+        if (item == null)
+            return false;
+        if (relic == null)
+            return false;
         ItemMeta itemMeta = item.getItemMeta();
-
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+
         container.set(relicTypeKey, PersistentDataType.STRING, relic.getName());
         item.setItemMeta(itemMeta);
-        return item;
+
+        return true;
     }
 
     public Collection<Relic> getRelicsMatchingFilter(Predicate<Relic> filter) {
