@@ -12,6 +12,7 @@ import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
+import world.sc2.shadowcraftrelics.relics.on_interact.Purger;
 import world.sc2.shadowcraftrelics.util.ItemUtils;
 
 import java.util.Collection;
@@ -21,11 +22,16 @@ import java.util.stream.Collectors;
 
 public class RelicManager {
 
+    // Dependencies
+    private final ShadowcraftRelics plugin;
     private final ConfigManager configManager;
+
+    // Properties
     private final NamespacedKey relicTypeKey;
     private final BiMap<Integer, Relic> allRelics;
 
     public RelicManager(ShadowcraftRelics plugin, ConfigManager configManager) {
+        this.plugin = plugin;
         this.configManager = configManager;
 
         // Create NamespacedKeys
@@ -38,6 +44,8 @@ public class RelicManager {
     private void registerRelics() {
         registerRelic(new SimonObliterator(1, "simon_obliterator",
                 configManager.getConfig("relicProperties/simonObliterator.yml")));
+        registerRelic(new Purger(2, "purger",
+                configManager.getConfig("relicProperties/purger.yml"), plugin));
     }
 
     private void registerRelic(Relic relic) {
@@ -80,7 +88,6 @@ public class RelicManager {
     /**
      * Applies a {@link Relic}'s NBT tag to the given {@link ItemStack}.
      */
-
     public void giveItemRelicNBTTag(@NotNull ItemStack item, @NotNull Relic relic) {
         ItemMeta itemMeta = item.getItemMeta();
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();

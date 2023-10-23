@@ -2,9 +2,11 @@ package world.sc2.shadowcraftrelics;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import world.sc2.shadowcraftrelics.commands.GiveRelicTagCommand;
+import world.sc2.shadowcraftrelics.commands.SetPurgerStatesCommand;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.config.ConfigUpdater;
 import world.sc2.shadowcraftrelics.listeners.EntityDamageListener;
+import world.sc2.shadowcraftrelics.listeners.PlayerInteractListener;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
 import java.io.File;
@@ -34,9 +36,11 @@ public final class ShadowcraftRelics extends JavaPlugin {
 
         // Register listeners
         getServer().getPluginManager().registerEvents(new EntityDamageListener(relicManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteractListener(relicManager), this);
 
         // Register commands
         Objects.requireNonNull(getCommand("giverelictag")).setExecutor(new GiveRelicTagCommand(relicManager));
+        Objects.requireNonNull(getCommand("setpurgerstates")).setExecutor(new SetPurgerStatesCommand(this));
     }
 
     @Override

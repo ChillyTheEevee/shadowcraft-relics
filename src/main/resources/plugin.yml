@@ -7,8 +7,15 @@ commands:
     description: Gives the player's held item the tag specific to a given Relic
     usage: /giverelictag <relic_name>
     permission: shadowcraftrelics.giverelictag
+  setpurgerstates:
+    description: Allows for the manual storage of an ItemStack within a separate ItemStack. Debug command.
+    usage: /setpurgerstates <state moment>
+    permission: shadowcraftrelics.setpurgerstates
 
 permissions:
   shadowcraftrelics.giverelictag:
     description: Gives the player the ability to use the /giverelictag command
+    default: op
+  shadowcraftrelics.setpurgerstates:
+    description: Gives the player the ability to use the /setpurgerstates command
     default: op

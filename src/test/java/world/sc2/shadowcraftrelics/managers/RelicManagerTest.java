@@ -37,17 +37,17 @@ class RelicManagerTest {
         ShadowcraftRelics mockPlugin = mock(ShadowcraftRelics.class);
         when(mockPlugin.getName()).thenReturn("ShadowcraftRelics");
 
-        // mockSOYAMLConfig
-        YamlConfiguration mockSOYAMLConfig = mock(YamlConfiguration.class);
-        when(mockSOYAMLConfig.getBoolean("isEnabled")).thenReturn(true);
+        // mockRelicYAMLConfigs
+        YamlConfiguration mockRelicYAMLConfigs = mock(YamlConfiguration.class);
+        when(mockRelicYAMLConfigs.getBoolean("isEnabled")).thenReturn(true);
 
-        // mockSOConfig
-        Config mockSOConfig = mock(Config.class);
-        when(mockSOConfig.get()).thenReturn(mockSOYAMLConfig);
+        // mockRelicConfigs
+        Config mockRelicConfigs = mock(Config.class);
+        when(mockRelicConfigs.get()).thenReturn(mockRelicYAMLConfigs);
 
         // mockConfigManager
         ConfigManager mockConfigManager = mock(ConfigManager.class);
-        when(mockConfigManager.getConfig("relicProperties/simonObliterator.yml")).thenReturn(mockSOConfig);
+        when(mockConfigManager.getConfig(any())).thenReturn(mockRelicConfigs);
 
         relicManager = new RelicManager(mockPlugin, mockConfigManager);
     }
