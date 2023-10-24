@@ -1,7 +1,6 @@
 package world.sc2.shadowcraftrelics.relics.on_attack;
 
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import world.sc2.shadowcraftrelics.config.Config;
@@ -16,8 +15,8 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
     private final String simonUUID;
     private final List<String> annoyingPeopleUUIDs;
 
-    public SimonObliterator(int id, String name, Config config) {
-        super(id, name, config);
+    public SimonObliterator(String name, Config config) {
+        super(name, config);
 
         // Relic-specific properties
         simonDamageMultiplier = (float)
@@ -27,13 +26,6 @@ public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
 
         simonUUID = config.get().getString("uniqueProperties.simonUUID");
         annoyingPeopleUUIDs = config.get().getStringList("uniqueProperties.annoyingPeopleUUIDs");
-    }
-
-    @Override
-    public boolean shouldTriggerFromEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player))
-            return false;
-        return event.getDamager() instanceof LivingEntity;
     }
 
     @Override

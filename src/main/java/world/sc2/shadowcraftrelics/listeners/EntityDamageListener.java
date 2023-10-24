@@ -33,13 +33,14 @@ public class EntityDamageListener implements Listener {
         LivingEntity realAttacker = EntityUtils.getRealAttacker(event.getDamager());
         if (realAttacker == null)
             return;
+
         ItemStack weapon = Objects.requireNonNull(realAttacker.getEquipment()).getItemInMainHand();
-        for (Relic relic : relicManager.getRelicsMatchingFilter(r -> r instanceof TriggerOnAttackRelic)) {
-            TriggerOnAttackRelic onAttackRelic = (TriggerOnAttackRelic) relic;
-            if (relicManager.isRelic(weapon, relic) && onAttackRelic.shouldTriggerFromEntityDamageByEntityEvent(event)) {
-                onAttackRelic.onAttack(event);
-            }
+
+        Relic relic = relicManager.getRelicType(weapon);
+        if (relic instanceof TriggerOnAttackRelic triggerOnAttackRelic) {
+            triggerOnAttackRelic.onAttack(event);
         }
+
     }
 
 }

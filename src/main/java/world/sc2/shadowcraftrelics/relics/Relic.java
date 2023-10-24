@@ -8,10 +8,8 @@ public abstract class Relic {
 
     protected final Config config;
     protected final String name;
-    protected final int id;
 
-    public Relic(int id, String name, Config config) {
-        this.id = id;
+    public Relic(String name, Config config) {
         this.name = name.toLowerCase();
         this.config = config;
     }
@@ -21,13 +19,6 @@ public abstract class Relic {
      */
     public final boolean isEnabled() {
         return config.get().getBoolean("isEnabled");
-    }
-
-    /**
-     * @return The assigned ID of the Relic. This ID is assigned when the Relic is instantiated in {@link RelicManager}
-     */
-    public final int getId() {
-        return id;
     }
 
     /**

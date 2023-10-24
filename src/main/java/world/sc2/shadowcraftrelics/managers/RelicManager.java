@@ -1,7 +1,5 @@
 package world.sc2.shadowcraftrelics.managers;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -15,6 +13,7 @@ import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.relics.on_interact.Purger;
 import world.sc2.shadowcraftrelics.util.ItemUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -28,7 +27,7 @@ public class RelicManager {
 
     // Properties
     private final NamespacedKey relicTypeKey;
-    private final BiMap<Integer, Relic> allRelics;
+    private final ArrayList<Relic> allRelics;
 
     public RelicManager(ShadowcraftRelics plugin, ConfigManager configManager) {
         this.plugin = plugin;
@@ -37,20 +36,24 @@ public class RelicManager {
         // Create NamespacedKeys
         relicTypeKey = new NamespacedKey(plugin, "relic_type");
 
-        allRelics = HashBiMap.create();
+        allRelics = new ArrayList<>();
         registerRelics();
     }
 
     private void registerRelics() {
-        registerRelic(new SimonObliterator(1, "simon_obliterator",
+        registerRelic(new SimonObliterator("simon_obliterator",
                 configManager.getConfig("relicProperties/simonObliterator.yml")));
-        registerRelic(new Purger(2, "purger",
+        registerRelic(new Purger("purger",
                 configManager.getConfig("relicProperties/purger.yml"), plugin));
     }
 
+    /**
+     * Registers the specified {@link Relic} with this RelicManager if it is enabled.
+     * @param relic The relic to register
+     */
     private void registerRelic(Relic relic) {
         if (relic.isEnabled()) {
-            allRelics.put(relic.getId(), relic);
+            allRelics.add(relic);
         }
     }
 
@@ -59,11 +62,29 @@ public class RelicManager {
      * @return the Relic associated with the given internal name, null if name is invalid.
      */
     public Relic getRelicFromName(String name) {
-        for (Relic relic : allRelics.values()) {
+        for (Relic relic : allRelics) {
             if (relic.getName().equals(name)) {
                 return relic;
             }
         }
+        return null;
+    }
+    /**
+     * Returns the {@link Relic} type that this item represents.
+     * @param item The item to get the Relic functionality of
+     * @return the type of Relic that the {@link ItemStack} represents, or null if the ItemStack is not a Relic
+     */
+    public Relic getRelicType(ItemStack item) {
+        if(ItemUtils.isAirOrNull(item)) {
+            return null;
+        }
+
+        PersistentDataContainer itemContainer = item.getItemMeta().getPersistentDataContainer();
+
+        if (itemContainer.has(relicTypeKey)) {
+            return getRelicFromName(itemContainer.get(relicTypeKey, PersistentDataType.STRING));
+        }
+
         return null;
     }
 
@@ -97,7 +118,7 @@ public class RelicManager {
     }
 
     public Collection<Relic> getRelicsMatchingFilter(Predicate<Relic> filter) {
-        return allRelics.values().stream().filter(filter).distinct().collect(Collectors.toList());
+        return allRelics.stream().filter(filter).distinct().collect(Collectors.toList());
     }
 
 }

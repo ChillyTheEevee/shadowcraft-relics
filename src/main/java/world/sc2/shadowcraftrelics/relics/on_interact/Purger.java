@@ -1,9 +1,7 @@
 package world.sc2.shadowcraftrelics.relics.on_interact;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -20,10 +18,22 @@ import world.sc2.shadowcraftrelics.util.ItemUtils;
 public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAttackRelic {
 
     private final NamespacedKey purgerStoredItemKey;
-    public Purger(int id, String name, Config config, ShadowcraftRelics plugin) {
-        super(id, name, config);
+    public Purger(String name, Config config, ShadowcraftRelics plugin) {
+        super(name, config);
 
         purgerStoredItemKey = new NamespacedKey(plugin, "storedPurgerItem");
+    }
+    @Override
+    public void onInteract(PlayerInteractEvent event) {
+        ItemStack currentPurger = event.getPlayer().getInventory().getItemInMainHand();
+        switchCurrentPurger(event.getPlayer(), currentPurger);
+    }
+
+    @Override
+    public void onAttack(EntityDamageByEntityEvent event) {
+        Player player = ((Player) event.getDamager());
+        ItemStack currentPurger = player.getEquipment().getItemInMainHand();
+        switchCurrentPurger(player, currentPurger);
     }
 
     private void switchCurrentPurger(Player player, ItemStack currentPurger) {
@@ -56,42 +66,6 @@ public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAt
 
         // todo  a d d  D o p a m i n e  s o u n d
 
-    }
-
-    @Override
-    public boolean shouldTriggerFromEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        // getRealAttacker() not used so that Purger does not change on bow hit
-        Entity attacker = event.getDamager();
-        if (!(attacker instanceof Player player))
-            return false;
-        ItemStack currentPurger = player.getEquipment().getItemInMainHand();
-        return currentPurger.getType() == Material.BOW;
-    }
-
-    @Override
-    public boolean shouldTriggerFromPlayerInteractEvent(PlayerInteractEvent event) {
-        if (!event.hasItem())
-            return false;
-        ItemStack currentPurger = event.getItem();
-        assert currentPurger != null;
-        if (currentPurger.getType() == Material.BOW) {
-            return event.getAction().isLeftClick();
-        } else {
-            return event.getAction().isRightClick();
-        }
-    }
-
-    @Override
-    public void onInteract(PlayerInteractEvent event) {
-        ItemStack currentPurger = event.getPlayer().getInventory().getItemInMainHand();
-        switchCurrentPurger(event.getPlayer(), currentPurger);
-    }
-
-    @Override
-    public void onAttack(EntityDamageByEntityEvent event) {
-        Player player = ((Player) event.getDamager());
-        ItemStack currentPurger = player.getEquipment().getItemInMainHand();
-        switchCurrentPurger(player, currentPurger);
     }
 
 }

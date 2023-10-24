@@ -4,25 +4,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
 /**
- * An interface that represents a {@link Relic} with functionality that triggers when the relic is used in an
- * {@link EntityDamageByEntityEvent}. The definition of a Relic being "used" varies depending on the Relic and is
- * defined by the method shouldTriggerFromEntityDamageByEntityEvent(EntityDamageByEntityEvent event).
+ * An interface that represents a {@link Relic} with functionality that triggers when the relic is directly used in an
+ * {@link EntityDamageByEntityEvent}. A Relic is being "used" in an EntityDamageByEntityEvent if it is held within
+ * the main hand slot of the attacker Entity when the event is declared.
  */
 public interface TriggerOnAttackRelic {
 
     /**
-     * The check that must be run to decide whether a TriggerOnAttackRelic's onAttack() method should be called.
-     * This method is called when an {@link EntityDamageByEntityEvent} is thrown and the item that the attacker is
-     * holding is an instance of the specified TriggerOnAttackRelic. Past that, it is up to each implementation of
-     * {@code TriggerOnAttackRelic} to decide when onAttack() should be called.
-     * @param event The instance of EntityDamageByEntityEvent
-     * @return true if onAttack(EntityDamageByEntityEvent event) should be called.
-     */
-    boolean shouldTriggerFromEntityDamageByEntityEvent(EntityDamageByEntityEvent event);
-
-    /**
-     * The code to be run when a {@link TriggerOnAttackRelic} decides it should be triggered.
-     * @param event The instance of EntityDamageByEntityEvent
+     * This method is called whenever an Entity attacks another Entity with this TriggerOnAttackRelic
+     * @param event The instance of {@link EntityDamageByEntityEvent} in which this Relic was used to attack.
      */
     void onAttack(EntityDamageByEntityEvent event);
 

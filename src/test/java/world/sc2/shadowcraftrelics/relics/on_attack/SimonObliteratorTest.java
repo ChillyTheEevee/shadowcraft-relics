@@ -81,7 +81,7 @@ class SimonObliteratorTest {
         when(mockConfig.get()).thenReturn(mockYAMLConfig);
 
         // Instantiate object to test
-        simonObliterator = new SimonObliterator(1, "simon_obliterator", mockConfig);
+        simonObliterator = new SimonObliterator("simon_obliterator", mockConfig);
     }
 
     @DisplayName("onAttack(): if Simon is attacked then multiply damage by simonDamageMultiplier")

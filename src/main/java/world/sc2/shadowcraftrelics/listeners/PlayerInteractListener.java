@@ -19,14 +19,13 @@ public class PlayerInteractListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
 
         // Relics that implement TriggerOnInteractRelic
-        ItemStack interactedRelic = event.getPlayer().getInventory().getItemInMainHand();
-        for (Relic relic : relicManager.getRelicsMatchingFilter(r -> r instanceof TriggerOnInteractRelic)) {
-            TriggerOnInteractRelic onInteractRelic = (TriggerOnInteractRelic) relic;
-            if (relicManager.isRelic(interactedRelic, relic) && onInteractRelic.shouldTriggerFromPlayerInteractEvent(event)) {
-                onInteractRelic.onInteract(event);
-            }
-        }
+        ItemStack itemInMainHand = event.getPlayer().getInventory().getItemInMainHand();
 
+        Relic relic = relicManager.getRelicType(itemInMainHand);
+
+        if (relic instanceof TriggerOnInteractRelic triggerOnInteractRelic) {
+            triggerOnInteractRelic.onInteract(event);
+        }
     }
 
 }
