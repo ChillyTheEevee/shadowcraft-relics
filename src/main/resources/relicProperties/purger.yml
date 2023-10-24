@@ -1,0 +1,6 @@
+# Edit properties specific to the Purger relic
+
+displayName: Purger
+isEnabled: True
+
+uniqueProperties:
