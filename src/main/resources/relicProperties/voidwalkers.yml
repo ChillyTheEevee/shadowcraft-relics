@@ -1,0 +1,16 @@
+# Edit properties specific to the Voidwalkers relic
+
+displayName: Voidwalkers
+isEnabled: True
+
+uniqueProperties:
+
+  triggersAtYLevel: -32
+
+  levitationTime: 10
+  levitationLevel: 20
+
+  enableSlowFallingAfterLevitation: True
+  slowFallingLevel: 1
+  slowFallingTime: 10
+

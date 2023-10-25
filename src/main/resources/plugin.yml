@@ -3,8 +3,8 @@ version: '${project.version}'
 main: world.sc2.shadowcraftrelics.ShadowcraftRelics
 api-version: '1.19'
 commands:
-  giverelictag:
-    description: Gives the player's held item the tag specific to a given Relic
+  giverelictags:
+    description: Gives the player's held item the NBT tags specific to a given Relic
     usage: /giverelictag <relic_name>
     permission: shadowcraftrelics.giverelictag
   setpurgerstates:

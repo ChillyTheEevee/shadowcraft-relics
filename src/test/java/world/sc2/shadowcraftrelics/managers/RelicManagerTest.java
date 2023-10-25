@@ -119,7 +119,7 @@ class RelicManagerTest {
         when(stoneAxe.getItemMeta()).thenReturn(stoneAxeMeta);
         when(stoneAxeMeta.getPersistentDataContainer()).thenReturn(stoneAxePDC);
 
-        relicManager.giveItemRelicNBTTag(stoneAxe, mockSimonObliteratorRelic);
+        relicManager.applyRelicNBTTags(stoneAxe, mockSimonObliteratorRelic);
 
         verify(stoneAxePDC).set(any(), eq(PersistentDataType.STRING), eq("simon_obliterator"));
         verify(stoneAxe).setItemMeta(stoneAxeMeta);

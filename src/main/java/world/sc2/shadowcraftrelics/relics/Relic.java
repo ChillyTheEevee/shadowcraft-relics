@@ -30,12 +30,4 @@ public abstract class Relic {
         return name;
     }
 
-    /**
-     * @return The display name of a Relic. This is the name that appears on the actual ItemStack.
-     * The display name is taken from the "displayName" key in the Relic's respective {@link Config}.
-     */
-    public final String getDisplayName() {
-        return config.get().getString("displayName");
-    }
-
 }

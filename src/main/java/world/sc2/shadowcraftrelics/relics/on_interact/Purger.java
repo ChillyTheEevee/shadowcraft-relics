@@ -11,18 +11,23 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.config.Config;
+import world.sc2.shadowcraftrelics.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.relics.Relic;
+import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnAttackRelic;
 import world.sc2.shadowcraftrelics.util.ItemUtils;
 
-public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAttackRelic {
+public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAttackRelic, NBTStorageRelic {
 
-    private final NamespacedKey purgerStoredItemKey;
+    private final NBTTag<byte[], byte[]> purgerStoredItemNBTTag;
+
     public Purger(String name, Config config, ShadowcraftRelics plugin) {
         super(name, config);
 
-        purgerStoredItemKey = new NamespacedKey(plugin, "storedPurgerItem");
+        var purgerStoredItemKey = new NamespacedKey(plugin, "storedPurgerItem");
+        purgerStoredItemNBTTag = new NBTTag<>(purgerStoredItemKey, PersistentDataType.BYTE_ARRAY);
     }
+
     @Override
     public void onInteract(PlayerInteractEvent event) {
         ItemStack currentPurger = event.getPlayer().getInventory().getItemInMainHand();
@@ -36,9 +41,18 @@ public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAt
         switchCurrentPurger(player, currentPurger);
     }
 
+    @Override
+    public NBTTag[] getRelicNBTTags() {
+        NBTTag[] nbtTags = new NBTTag[1];
+        nbtTags[0] = purgerStoredItemNBTTag;
+        return nbtTags;
+    }
+
     private void switchCurrentPurger(Player player, ItemStack currentPurger) {
         ItemMeta currentPurgerMeta = currentPurger.getItemMeta();
         PersistentDataContainer currentPurgerPDC = currentPurgerMeta.getPersistentDataContainer();
+
+        NamespacedKey purgerStoredItemKey = purgerStoredItemNBTTag.getNamespacedKey();
 
         if (!currentPurgerPDC.has(purgerStoredItemKey, PersistentDataType.BYTE_ARRAY)) {
             Bukkit.getLogger().severe("Purger cannot switch because Purger does not have purgerStoredItemKey!");
