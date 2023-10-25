@@ -2,15 +2,17 @@ package world.sc2.shadowcraftrelics.managers;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
+import world.sc2.shadowcraftrelics.nbt.NBTTag;
+import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.relics.on_interact.Purger;
+import world.sc2.shadowcraftrelics.relics.on_move.Voidwalkers;
 import world.sc2.shadowcraftrelics.util.ItemUtils;
 
 import java.util.ArrayList;
@@ -26,15 +28,16 @@ public class RelicManager {
     private final ConfigManager configManager;
 
     // Properties
-    private final NamespacedKey relicTypeKey;
+    private final NBTTag relicTypeTag;
     private final ArrayList<Relic> allRelics;
 
     public RelicManager(ShadowcraftRelics plugin, ConfigManager configManager) {
         this.plugin = plugin;
         this.configManager = configManager;
 
-        // Create NamespacedKeys
-        relicTypeKey = new NamespacedKey(plugin, "relic_type");
+        // Create NBT Tags
+        var relicTypeKey = new NamespacedKey(plugin, "relic_type");
+        relicTypeTag = new NBTTag(relicTypeKey, PersistentDataType.STRING);
 
         allRelics = new ArrayList<>();
         registerRelics();
@@ -45,6 +48,8 @@ public class RelicManager {
                 configManager.getConfig("relicProperties/simonObliterator.yml")));
         registerRelic(new Purger("purger",
                 configManager.getConfig("relicProperties/purger.yml"), plugin));
+        registerRelic(new Voidwalkers("voidwalkers",
+                configManager.getConfig("relicProperties/voidwalkers.yml"), plugin));
     }
 
     /**
@@ -80,6 +85,7 @@ public class RelicManager {
         }
 
         PersistentDataContainer itemContainer = item.getItemMeta().getPersistentDataContainer();
+        NamespacedKey relicTypeKey = relicTypeTag.getNamespacedKey();
 
         if (itemContainer.has(relicTypeKey)) {
             return getRelicFromName(itemContainer.get(relicTypeKey, PersistentDataType.STRING));
@@ -99,6 +105,7 @@ public class RelicManager {
             return false;
 
         PersistentDataContainer itemContainer = item.getItemMeta().getPersistentDataContainer();
+        NamespacedKey relicTypeKey = relicTypeTag.getNamespacedKey();
 
         if (!itemContainer.has(relicTypeKey))
             return false;
@@ -107,14 +114,20 @@ public class RelicManager {
     }
 
     /**
-     * Applies a {@link Relic}'s NBT tag to the given {@link ItemStack}.
+     * Applies a {@link Relic}'s necessary NBT tags to the given {@link ItemStack}. Does not currently work for
+     * {@link Purger}.
+     *
+     * @param item The item to add the NBT tags to
+     * @param relic The relic to get the NBT tags from
      */
-    public void giveItemRelicNBTTag(@NotNull ItemStack item, @NotNull Relic relic) {
-        ItemMeta itemMeta = item.getItemMeta();
-        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+    public void applyRelicNBTTags(@NotNull ItemStack item, @NotNull Relic relic) {
+        relicTypeTag.applyTag(item, relic.getName());
 
-        container.set(relicTypeKey, PersistentDataType.STRING, relic.getName());
-        item.setItemMeta(itemMeta);
+        if (relic instanceof NBTStorageRelic nbtStorageRelic) {
+            for (NBTTag nbtTag : nbtStorageRelic.getRelicNBTTags()) {
+                nbtTag.applyTag(item);
+            }
+        }
     }
 
     public Collection<Relic> getRelicsMatchingFilter(Predicate<Relic> filter) {

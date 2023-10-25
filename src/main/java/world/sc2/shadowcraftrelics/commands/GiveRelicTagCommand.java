@@ -48,9 +48,9 @@ public class GiveRelicTagCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        relicManager.giveItemRelicNBTTag(heldItem, wantedRelic);
+        relicManager.applyRelicNBTTags(heldItem, wantedRelic);
 
-        player.sendMessage(ChatColor.GREEN + "NBT Tag successfully applied!");
+        player.sendMessage(ChatColor.GREEN + "NBT Tags successfully applied!");
 
         return true;
     }

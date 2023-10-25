@@ -6,7 +6,9 @@ import world.sc2.shadowcraftrelics.commands.SetPurgerStatesCommand;
 import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.config.ConfigUpdater;
 import world.sc2.shadowcraftrelics.listeners.EntityDamageListener;
+import world.sc2.shadowcraftrelics.listeners.PlayerHitGroundListener;
 import world.sc2.shadowcraftrelics.listeners.PlayerInteractListener;
+import world.sc2.shadowcraftrelics.listeners.PlayerMoveListener;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
 import java.io.File;
@@ -33,13 +35,17 @@ public final class ShadowcraftRelics extends JavaPlugin {
 
         // Setup and update configs
         saveAndUpdateConfig("relicProperties/simonObliterator.yml");
+        saveAndUpdateConfig("relicProperties/purger.yml");
+        saveAndUpdateConfig("relicProperties/voidwalkers.yml");
 
         // Register listeners
         getServer().getPluginManager().registerEvents(new EntityDamageListener(relicManager), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(relicManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(relicManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerHitGroundListener(relicManager), this);
 
         // Register commands
-        Objects.requireNonNull(getCommand("giverelictag")).setExecutor(new GiveRelicTagCommand(relicManager));
+        Objects.requireNonNull(getCommand("giverelictags")).setExecutor(new GiveRelicTagCommand(relicManager));
         Objects.requireNonNull(getCommand("setpurgerstates")).setExecutor(new SetPurgerStatesCommand(this));
     }
 
