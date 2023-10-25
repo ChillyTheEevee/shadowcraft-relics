@@ -8,7 +8,7 @@ import world.sc2.shadowcraftrelics.relics.Relic;
  * {@link EntityDamageByEntityEvent}. A Relic is being "used" in an EntityDamageByEntityEvent if it is held within
  * the main hand slot of the attacker Entity when the event is declared.
  */
-public interface TriggerOnAttackRelic {
+public interface TriggerOnDirectAttackRelic {
 
     /**
      * This method is called whenever an Entity attacks another Entity with this TriggerOnAttackRelic

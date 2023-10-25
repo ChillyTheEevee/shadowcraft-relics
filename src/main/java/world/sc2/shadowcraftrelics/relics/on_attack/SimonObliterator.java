@@ -8,7 +8,7 @@ import world.sc2.shadowcraftrelics.relics.Relic;
 
 import java.util.List;
 
-public class SimonObliterator extends Relic implements TriggerOnAttackRelic {
+public class SimonObliterator extends Relic implements TriggerOnDirectAttackRelic {
 
     private final float simonDamageMultiplier;
     private final float annoyingDamageMultiplier;
