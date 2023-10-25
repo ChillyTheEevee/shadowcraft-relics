@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.EntityEquipment;
 import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
-import world.sc2.shadowcraftrelics.relics.onHitGround.TriggerOnEntityHitGroundRelic;
+import world.sc2.shadowcraftrelics.relics.on_hit_ground.TriggerOnEntityHitGroundRelic;
 
 public class PlayerHitGroundListener implements Listener {
 
