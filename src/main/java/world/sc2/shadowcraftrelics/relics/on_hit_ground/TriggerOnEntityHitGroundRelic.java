@@ -1,4 +1,4 @@
-package world.sc2.shadowcraftrelics.relics.onHitGround;
+package world.sc2.shadowcraftrelics.relics.on_hit_ground;
 
 import org.bukkit.entity.LivingEntity;
 import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;

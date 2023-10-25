@@ -16,7 +16,7 @@ import world.sc2.shadowcraftrelics.config.Config;
 import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
 import world.sc2.shadowcraftrelics.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.relics.Relic;
-import world.sc2.shadowcraftrelics.relics.onHitGround.TriggerOnEntityHitGroundRelic;
+import world.sc2.shadowcraftrelics.relics.on_hit_ground.TriggerOnEntityHitGroundRelic;
 
 public class Voidwalkers extends Relic implements TriggerOnMoveRelic, TriggerOnEntityHitGroundRelic {
 
