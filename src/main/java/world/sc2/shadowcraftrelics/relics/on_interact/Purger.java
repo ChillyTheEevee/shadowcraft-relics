@@ -1,6 +1,7 @@
 package world.sc2.shadowcraftrelics.relics.on_interact;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -12,12 +13,12 @@ import org.bukkit.persistence.PersistentDataType;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.config.Config;
 import world.sc2.shadowcraftrelics.nbt.NBTTag;
-import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
-import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnAttackRelic;
+import world.sc2.shadowcraftrelics.relics.Relic;
+import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
 import world.sc2.shadowcraftrelics.util.ItemUtils;
 
-public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAttackRelic, NBTStorageRelic {
+public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnDirectAttackRelic, NBTStorageRelic {
 
     private final NBTTag<byte[], byte[]> purgerStoredItemNBTTag;
 
@@ -30,15 +31,24 @@ public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnAt
 
     @Override
     public void onInteract(PlayerInteractEvent event) {
-        ItemStack currentPurger = event.getPlayer().getInventory().getItemInMainHand();
-        switchCurrentPurger(event.getPlayer(), currentPurger);
+        Player player = event.getPlayer();
+        ItemStack currentPurger = player.getInventory().getItemInMainHand();
+        Bukkit.getLogger().info("onInteract called for material " + currentPurger.getType());
+        if (currentPurger.getType() == Material.BOW && event.getAction().isLeftClick()) {
+            switchCurrentPurger(player, currentPurger);
+        } else if (currentPurger.getType() != Material.BOW && event.getAction().isRightClick()) {
+            switchCurrentPurger(player, currentPurger);
+        }
     }
 
     @Override
     public void onAttack(EntityDamageByEntityEvent event) {
         Player player = ((Player) event.getDamager());
         ItemStack currentPurger = player.getEquipment().getItemInMainHand();
-        switchCurrentPurger(player, currentPurger);
+        Bukkit.getLogger().info("onAttack called for material " + currentPurger.getType());
+        if (currentPurger.getType() == Material.BOW) {
+            switchCurrentPurger(player, currentPurger);
+        }
     }
 
     @Override

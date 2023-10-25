@@ -125,7 +125,8 @@ public class RelicManager {
 
         if (relic instanceof NBTStorageRelic nbtStorageRelic) {
             for (NBTTag nbtTag : nbtStorageRelic.getRelicNBTTags()) {
-                nbtTag.applyTag(item);
+                if (nbtTag.getDefaultData() != null)
+                    nbtTag.applyTag(item);
             }
         }
     }
