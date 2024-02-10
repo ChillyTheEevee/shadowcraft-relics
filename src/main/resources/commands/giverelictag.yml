@@ -1,0 +1,11 @@
+description: "Applies the given relic tag to the executor's held item"
+usage: "/relics giverelictag <relic_tag>"
+permission:
+  - "shadowcraftrelics.giverelictag"
+
+messages:
+  application_successful: "&aRelic tag successfully applied!"
+  warning_non_player_sender: "&cOnly players can use this command!"
+  warning_invalid_item: "&cYou must be holding a valid item."
+  # %s denotes the name of the invalid relic tag entered by the user
+  warning_invalid_relic_tag: "&c\"%s\" is not a valid relic tag!"

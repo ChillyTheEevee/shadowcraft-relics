@@ -12,9 +12,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
-import world.sc2.shadowcraftrelics.config.Config;
+import world.sc2.config.Config;
+import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
-import world.sc2.shadowcraftrelics.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_hit_ground.TriggerOnEntityHitGroundRelic;
 
@@ -41,7 +41,6 @@ public class Voidwalkers extends Relic implements TriggerOnMoveRelic, TriggerOnE
         // Create NBT Tags
         var voidwalkersTriggeredKey = new NamespacedKey(plugin, "voidwalkersTriggered");
         voidwalkersTriggeredTag = new NBTTag(voidwalkersTriggeredKey, PersistentDataType.INTEGER, 0);
-
 
         // Get data from Config
         YamlConfiguration configInstance = config.get();

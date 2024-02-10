@@ -1,64 +1,64 @@
 package world.sc2.shadowcraftrelics.commands;
 
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import world.sc2.command.Command;
+import world.sc2.config.Config;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
-import world.sc2.shadowcraftrelics.util.ItemUtils;
+import world.sc2.utility.ChatUtils;
+import world.sc2.utility.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class GiveRelicTagCommand implements CommandExecutor, TabCompleter {
+public class GiveRelicTagCommand extends Command {
 
+    private final static String APPLICATION_SUCCESSFUL_KEY = "messages.application_successful";
+    private final static String WARNING_NON_PLAYER_SENDER_KEY = "messages.warning_non_player_sender";
+    private final static String WARNING_INVALID_ITEM_KEY = "messages.warning_invalid_item";
+    private final static String WARNING_INVALID_RELIC_TAG_KEY = "messages.warning_invalid_relic_tag";
     private final RelicManager relicManager;
 
-    public GiveRelicTagCommand(RelicManager relicManager) {
+    public GiveRelicTagCommand(Config config, RelicManager relicManager) {
+        super(config);
         this.relicManager = relicManager;
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
-                             @NotNull String label, @NotNull String[] args) {
-        if (args.length != 1) {
+    public boolean onCommand(CommandSender sender, String[] args) {
+        if (args.length != 2) {
             return false;
         }
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(ChatColor.RED + "Only players can use this command!");
+            sender.sendMessage(ChatUtils.chat(config.get().getString(WARNING_NON_PLAYER_SENDER_KEY)));
             return true;
         }
         ItemStack heldItem = player.getInventory().getItemInMainHand();
         if (ItemUtils.isAirOrNull(heldItem)) {
-            player.sendMessage(ChatColor.RED + "You must be holding a valid item!");
+            player.sendMessage(ChatUtils.chat(config.get().getString(WARNING_INVALID_ITEM_KEY)));
             return true;
         }
 
-        Relic wantedRelic = relicManager.getRelicFromName(args[0]);
+        Relic wantedRelic = relicManager.getRelicFromName(args[1]);
 
         if (wantedRelic == null) {
-            player.sendMessage(ChatColor.RED + "\"" + args[0] + "\" is not a valid relic name!");
+            player.sendMessage(String.format(ChatUtils.chat(config.get().getString(WARNING_INVALID_RELIC_TAG_KEY))));
             return true;
         }
 
         relicManager.applyRelicNBTTags(heldItem, wantedRelic);
 
-        player.sendMessage(ChatColor.GREEN + "NBT Tags successfully applied!");
+        player.sendMessage(ChatUtils.chat(config.get().getString(APPLICATION_SUCCESSFUL_KEY)));
 
         return true;
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-                                                @NotNull String label, @NotNull String[] args) {
-        if (args.length != 1)
+    public List<String> onTabComplete(CommandSender sender, String[] args) {
+        if (args.length != 2)
             return null;
         Collection<Relic> allRelics = relicManager.getRelicsMatchingFilter(r -> true);
         ArrayList<String> allRelicNames = new ArrayList<>();

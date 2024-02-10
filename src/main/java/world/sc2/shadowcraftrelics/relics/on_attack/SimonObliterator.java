@@ -3,7 +3,7 @@ package world.sc2.shadowcraftrelics.relics.on_attack;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import world.sc2.shadowcraftrelics.config.Config;
+import world.sc2.config.Config;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
 import java.util.List;

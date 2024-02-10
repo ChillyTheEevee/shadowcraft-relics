@@ -10,13 +10,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import world.sc2.config.Config;
+import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
-import world.sc2.shadowcraftrelics.config.Config;
-import world.sc2.shadowcraftrelics.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
-import world.sc2.shadowcraftrelics.util.ItemUtils;
+import world.sc2.utility.ItemUtils;
 
 public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnDirectAttackRelic, NBTStorageRelic {
 
