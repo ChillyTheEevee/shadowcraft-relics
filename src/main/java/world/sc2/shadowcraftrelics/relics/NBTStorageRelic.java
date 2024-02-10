@@ -1,6 +1,6 @@
 package world.sc2.shadowcraftrelics.relics;
 
-import world.sc2.shadowcraftrelics.nbt.NBTTag;
+import world.sc2.nbt.NBTTag;
 
 /**
  * Represents an {@link Relic} that stores further NBT data aside from the relicType NBT Tag.

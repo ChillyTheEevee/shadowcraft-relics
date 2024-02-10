@@ -2,20 +2,24 @@ name: ShadowcraftRelics
 version: '${project.version}'
 main: world.sc2.shadowcraftrelics.ShadowcraftRelics
 api-version: '1.19'
+author: "ChillyTheEevee"
 commands:
-  giverelictags:
-    description: Gives the player's held item the NBT tags specific to a given Relic
-    usage: /giverelictag <relic_name>
-    permission: shadowcraftrelics.giverelictag
-  setpurgerstates:
-    description: Allows for the manual storage of an ItemStack within a separate ItemStack. Debug command.
-    usage: /setpurgerstates <state moment>
-    permission: shadowcraftrelics.setpurgerstates
+  relics:
+    description: Base command for the ShadowcraftRelics plugin
+    usage: /relics <subcommand>
+    aliases:
+      - shadowcraftrelics
 
 permissions:
+  shadowcraftrelics.help:
+    description: Grants the player the ability to use the /relics help command
+    default: op
+  shadowcraftrelics.reload:
+    description: Grants the player the ability to use the /relics reload command
+    default: op
   shadowcraftrelics.giverelictag:
-    description: Gives the player the ability to use the /giverelictag command
+    description: Grants the player the ability to use the /relics giverelictag command
     default: op
   shadowcraftrelics.setpurgerstates:
-    description: Gives the player the ability to use the /setpurgerstates command
+    description: Grants the player the ability to use the /relics setpurgerstates command
     default: op

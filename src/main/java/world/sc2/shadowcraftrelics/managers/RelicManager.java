@@ -5,15 +5,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+import world.sc2.config.ConfigManager;
+import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
-import world.sc2.shadowcraftrelics.config.ConfigManager;
-import world.sc2.shadowcraftrelics.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.relics.on_interact.Purger;
 import world.sc2.shadowcraftrelics.relics.on_move.Voidwalkers;
-import world.sc2.shadowcraftrelics.util.ItemUtils;
+import world.sc2.utility.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
