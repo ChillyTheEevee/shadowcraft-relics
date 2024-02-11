@@ -5,6 +5,9 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import world.sc2.config.Config;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
+/**
+ * A food {@link Relic} that has the special property of banning the {@link Player} that consumes it.
+ */
 public class ForbiddenFruit extends Relic implements TriggerOnConsumeRelic {
 
     private final static String BAN_MESSAGE_KEY = "uniqueProperties.banMessage";

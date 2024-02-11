@@ -7,6 +7,9 @@ import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.on_hit_ground.TriggerOnEntityHitGroundRelic;
 
+/**
+ * A {@link Listener} for listening to the custom {@link PlayerHitGroundEvent}.
+ */
 public class PlayerHitGroundListener implements Listener {
 
     private final RelicManager relicManager;

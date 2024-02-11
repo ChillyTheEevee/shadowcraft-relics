@@ -10,6 +10,9 @@ import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.on_move.TriggerOnMoveRelic;
 
+/**
+ * A {@link Listener} for listening to the {@link PlayerMoveEvent}.
+ */
 public class PlayerMoveListener implements Listener {
 
     private final RelicManager relicManager;

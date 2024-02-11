@@ -5,6 +5,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Stores data for when a {@link Player} touches the ground after being airborne
+ * @author ChillyTheEevee
+ */
 public class PlayerHitGroundEvent extends PlayerEvent {
 
     private static final HandlerList HANDLERS = new HandlerList();

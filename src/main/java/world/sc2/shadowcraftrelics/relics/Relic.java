@@ -1,9 +1,16 @@
 package world.sc2.shadowcraftrelics.relics;
 
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import world.sc2.config.Config;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
+/**
+ * A representation of an {@link ItemStack} with special properties. These special properties could be triggered by a
+ * variety of events.
+ *
+ * @author ChillyTheEevee
+ */
 public abstract class Relic {
 
     protected final Config config;

@@ -8,6 +8,10 @@ import world.sc2.shadowcraftrelics.commands.GiveRelicTagCommand;
 import world.sc2.shadowcraftrelics.listeners.*;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
+/**
+ * The main class of the ShadowcraftRelics plugin.
+ * @author ChillyTheEevee
+ */
 public final class ShadowcraftRelics extends JavaPlugin {
 
     // Managers
