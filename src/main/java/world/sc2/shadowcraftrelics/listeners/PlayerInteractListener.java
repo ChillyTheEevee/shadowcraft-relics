@@ -17,7 +17,6 @@ public class PlayerInteractListener implements Listener {
     }
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-
         // Relics that implement TriggerOnInteractRelic
         ItemStack itemInMainHand = event.getPlayer().getInventory().getItemInMainHand();
 

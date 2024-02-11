@@ -1,11 +1,11 @@
-# Edit properties specific to the Purger relic
+# Edit properties specific to the Forerunner's Testament relic
 
-displayName: Purger
+displayName: Forerunner's Testament
 isEnabled: True
 
 uniqueProperties:
 
-# Purger error messages
+# Forerunner's Testament error messages
 messages:
   warning_missing_index: "&cCurrent states does not have an index!"
   warning_stored_relic_states_null: "&cStored relic states are null!"
