@@ -22,6 +22,11 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * A class used for managing the various {@link Relic} classes in SC2. Contains several functions for accessing data on
+ * and manipulating these relics.
+ * @author ChillyTheEevee
+ */
 public class RelicManager {
 
     // Dependencies

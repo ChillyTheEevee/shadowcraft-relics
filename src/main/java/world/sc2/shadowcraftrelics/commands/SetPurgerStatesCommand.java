@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import world.sc2.command.Command;
 import world.sc2.config.Config;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.utility.ChatUtils;
@@ -15,6 +16,10 @@ import world.sc2.utility.ItemUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A debug {@link Command} that grants Purger tags to ItemStacks.
+ * @author ChillyTheEevee
+ */
 public class SetPurgerStatesCommand extends world.sc2.command.Command {
 
     private static final String SERIALIZATION_SUCCESSFUL_KEY = "messages.serialization_successful";

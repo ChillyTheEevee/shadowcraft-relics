@@ -8,6 +8,9 @@ import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 
+/**
+ * A {@link Listener} for listening to the {@link PlayerInteractEvent}.
+ */
 public class PlayerInteractListener implements Listener {
 
     private final RelicManager relicManager;

@@ -18,6 +18,9 @@ import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
 import world.sc2.utility.ItemUtils;
 
+/**
+ * A {@link Relic} that has the ability to morph between a sword and a bow.
+ */
 public class Purger extends Relic implements TriggerOnInteractRelic, TriggerOnDirectAttackRelic, NBTStorageRelic {
 
     private final NBTTag<byte[], byte[]> purgerStoredItemNBTTag;

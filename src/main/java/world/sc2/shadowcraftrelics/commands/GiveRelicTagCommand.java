@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * A {@link Command} that has the primary purpose of granting relic tags to ItemStacks.
+ * @author ChillyTheEevee
+ */
 public class GiveRelicTagCommand extends Command {
 
     private final static String APPLICATION_SUCCESSFUL_KEY = "messages.application_successful";
