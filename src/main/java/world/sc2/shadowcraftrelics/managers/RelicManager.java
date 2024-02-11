@@ -10,9 +10,9 @@ import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
+import world.sc2.shadowcraftrelics.relics.morphable_relic.*;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.relics.on_consume.ForbiddenFruit;
-import world.sc2.shadowcraftrelics.relics.on_interact.Purger;
 import world.sc2.shadowcraftrelics.relics.on_move.Voidwalkers;
 import world.sc2.utility.ItemUtils;
 
@@ -50,14 +50,52 @@ public class RelicManager {
     }
 
     private void registerRelics() {
+        // Relics
         registerRelic(new SimonObliterator("simon_obliterator",
-                configManager.getConfig("relicProperties/simonObliterator.yml")));
-        registerRelic(new Purger("purger",
-                configManager.getConfig("relicProperties/purger.yml"), plugin));
+                configManager.getConfig("relicProperties/simon_obliterator.yml")));
         registerRelic(new Voidwalkers("voidwalkers",
                 configManager.getConfig("relicProperties/voidwalkers.yml"), plugin));
         registerRelic(new ForbiddenFruit("forbidden_fruit",
                 configManager.getConfig("relicProperties/forbidden_fruit.yml")));
+
+        // Morphable Relics
+        NBTTag<String, String> morphConfigIDTag = new NBTTag<>(new NamespacedKey(plugin, "morphConfigID"),
+                PersistentDataType.STRING);
+        NBTTag<Integer, Integer> morphIndexTag = new NBTTag<>(new NamespacedKey(plugin, "morphIndex"),
+        PersistentDataType.INTEGER);
+
+        registerRelic(new Purger("purger", configManager.getConfig("relicProperties/purger.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Paladin's blade
+        NBTTag<Long, Long> lastActivationTimeTag = new NBTTag<>(new NamespacedKey(plugin, "lastActivationTime"),
+                PersistentDataType.LONG);
+        registerRelic(new PaladinsBlade("paladins_blade",
+                configManager.getConfig("relicProperties/paladins_blade.yml"),
+                configManager, morphConfigIDTag, morphIndexTag, lastActivationTimeTag));
+
+        registerRelic(new HolyStrike("holy_strike", configManager.getConfig("relicProperties/holy_strike"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Forerunner's Testament
+        registerRelic(new ForerunnersTestament("forerunners_testament",
+                configManager.getConfig("relicProperties/forerunnerstestament.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Foreign Forged Blade
+        registerRelic(new ForeignForgedBlade("foreign_forged_blade",
+                configManager.getConfig("relicProperties/foreign_forged_blade.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Multitool
+        registerRelic(new Multitool("multitool",
+                configManager.getConfig("relicProperties/multitool.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Worldbreaker
+        registerRelic(new Worldbreaker("worldbreaker",
+                configManager.getConfig("relicProperties/worldbreaker.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
     }
 
     /**

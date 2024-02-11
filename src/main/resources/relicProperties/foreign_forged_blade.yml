@@ -1,11 +1,11 @@
-# Edit properties specific to the Purger relic
+# Edit properties specific to the Foreign Forged Blade relic
 
-displayName: Purger
+displayName: Foreign Forged Blade
 isEnabled: True
 
 uniqueProperties:
 
-# Purger error messages
+# Foreign Forged Blade error messages
 messages:
   warning_missing_index: "&cCurrent states does not have an index!"
   warning_stored_relic_states_null: "&cStored relic states are null!"

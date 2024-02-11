@@ -1,11 +1,11 @@
-# Edit properties specific to the Purger relic
+# Edit properties specific to the Multitool relic
 
-displayName: Purger
+displayName: Multitool
 isEnabled: True
 
 uniqueProperties:
 
-# Purger error messages
+# Multitool error messages
 messages:
   warning_missing_index: "&cCurrent states does not have an index!"
   warning_stored_relic_states_null: "&cStored relic states are null!"
