@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import world.sc2.command.CommandManager;
 import world.sc2.config.ConfigManager;
 import world.sc2.shadowcraftrelics.commands.GiveRelicTagCommand;
-import world.sc2.shadowcraftrelics.commands.SetPurgerStatesCommand;
+import world.sc2.shadowcraftrelics.commands.SetNextMorphableRelicStateCommand;
 import world.sc2.shadowcraftrelics.listeners.*;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
@@ -35,8 +35,9 @@ public final class ShadowcraftRelics extends JavaPlugin {
         // Register commands
         commandManager.addCommand("giverelictag",
                 new GiveRelicTagCommand(configManager.getConfig("commands/giverelictag.yml"), relicManager));
-        commandManager.addCommand("setpurgerstates",
-                new SetPurgerStatesCommand(configManager.getConfig("commands/setpurgerstates.yml"), this));
+        commandManager.addCommand("setnextmorphablerelicstate",
+                new SetNextMorphableRelicStateCommand(
+                        configManager.getConfig("commands/setnextmorphablerelicstate.yml"), this));
 
         // Save configs
         configManager.saveConfigs();

@@ -18,6 +18,7 @@ public class PlayerHitGroundEvent extends PlayerEvent {
         return HANDLERS;
     }
 
+    // This is required, don't touch it
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }

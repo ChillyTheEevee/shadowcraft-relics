@@ -12,7 +12,7 @@ import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.relics.on_consume.ForbiddenFruit;
-import world.sc2.shadowcraftrelics.relics.on_interact.Purger;
+import world.sc2.shadowcraftrelics.relics.morphable_relic.Purger;
 import world.sc2.shadowcraftrelics.relics.on_move.Voidwalkers;
 import world.sc2.utility.ItemUtils;
 
@@ -45,14 +45,17 @@ public class RelicManager {
     }
 
     private void registerRelics() {
+        // Relics
         registerRelic(new SimonObliterator("simon_obliterator",
                 configManager.getConfig("relicProperties/simonObliterator.yml")));
-        registerRelic(new Purger("purger",
-                configManager.getConfig("relicProperties/purger.yml"), plugin));
         registerRelic(new Voidwalkers("voidwalkers",
                 configManager.getConfig("relicProperties/voidwalkers.yml"), plugin));
         registerRelic(new ForbiddenFruit("forbidden_fruit",
                 configManager.getConfig("relicProperties/forbidden_fruit.yml")));
+
+        // Morphable Relics
+
+        registerRelic(new Purger("purger", configManager.getConfig("relicProperties/purger.yml")));
     }
 
     /**

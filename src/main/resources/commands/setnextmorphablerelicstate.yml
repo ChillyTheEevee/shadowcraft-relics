@@ -1,0 +1,12 @@
+description: "Stores the next state of a MorphableRelic within the current state of the MorphableRelic. Debug command."
+usage: "/setnextmorphablerelicstate <current | next>"
+permission:
+  - "shadowcraftrelics.setnextmorphablerelicstate"
+
+messages:
+  current_state_storage_successful: "&aSuccessfully set held item as current state!"
+  serialization_successful: "&aSerialized held item into the Persistent Data Container of the current state!"
+
+  warning_non_player_sender: "&cOnly players can use this command!"
+  warning_invalid_item: "&cYou must be holding a valid item."
+  warning_invalid_base_state: "&cYou have not yet defined the current state to encode this item into!"

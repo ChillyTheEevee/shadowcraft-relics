@@ -9,6 +9,10 @@ public abstract class Relic {
     protected final Config config;
     protected final String name;
 
+    /**
+     * @param name The name of the Relic
+     * @param config The {@link Config} assigned to the Relic
+     */
     public Relic(String name, Config config) {
         this.name = name.toLowerCase();
         this.config = config;
