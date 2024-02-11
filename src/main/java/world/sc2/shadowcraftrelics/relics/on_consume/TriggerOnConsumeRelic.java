@@ -12,7 +12,7 @@ public interface TriggerOnConsumeRelic {
 
     /**
      * This method is called whenever a Player consumes this relic in a {@link PlayerItemConsumeEvent}.
-     * @param event The instance of {@link EntityDamageByEntityEvent} in which this Relic was used to attack.
+     * @param event The instance of {@link EntityDamageByEntityEvent} in which this Relic was consumed in.
      */
     void onConsume(PlayerItemConsumeEvent event);
 

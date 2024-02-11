@@ -18,6 +18,9 @@ import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.on_hit_ground.TriggerOnEntityHitGroundRelic;
 
+/**
+ * A {@link Relic} that grants the wearer the ability to levitate out of the void.
+ */
 public class Voidwalkers extends Relic implements TriggerOnMoveRelic, TriggerOnEntityHitGroundRelic {
 
     // System

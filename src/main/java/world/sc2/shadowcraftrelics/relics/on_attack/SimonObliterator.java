@@ -8,6 +8,9 @@ import world.sc2.shadowcraftrelics.relics.Relic;
 
 import java.util.List;
 
+/**
+ * A melee {@link Relic} that has the special property of dealing extra damage to users with config-defined UUIDs.
+ */
 public class SimonObliterator extends Relic implements TriggerOnDirectAttackRelic {
 
     private final float simonDamageMultiplier;
