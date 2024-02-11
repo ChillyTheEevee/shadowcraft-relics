@@ -5,10 +5,7 @@ import world.sc2.command.CommandManager;
 import world.sc2.config.ConfigManager;
 import world.sc2.shadowcraftrelics.commands.GiveRelicTagCommand;
 import world.sc2.shadowcraftrelics.commands.SetPurgerStatesCommand;
-import world.sc2.shadowcraftrelics.listeners.EntityDamageListener;
-import world.sc2.shadowcraftrelics.listeners.PlayerHitGroundListener;
-import world.sc2.shadowcraftrelics.listeners.PlayerInteractListener;
-import world.sc2.shadowcraftrelics.listeners.PlayerMoveListener;
+import world.sc2.shadowcraftrelics.listeners.*;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
 public final class ShadowcraftRelics extends JavaPlugin {
@@ -33,6 +30,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(relicManager), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveListener(relicManager), this);
         getServer().getPluginManager().registerEvents(new PlayerHitGroundListener(relicManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(relicManager), this);
 
         // Register commands
         commandManager.addCommand("giverelictag",
