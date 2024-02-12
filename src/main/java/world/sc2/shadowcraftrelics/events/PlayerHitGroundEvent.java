@@ -13,6 +13,9 @@ public class PlayerHitGroundEvent extends PlayerEvent {
 
     private static final HandlerList HANDLERS = new HandlerList();
 
+    /**
+     * @param who The player that hit the ground
+     */
     public PlayerHitGroundEvent(@NotNull Player who) {
         super(who);
     }

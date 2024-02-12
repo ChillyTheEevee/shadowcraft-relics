@@ -13,6 +13,12 @@ import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 
 import java.time.Instant;
 
+/**
+ * A {@link ConfigMorphableRelic} that has the special property of morphing into a {@link HolyStrike} when used to
+ * right-click in a {@link PlayerInteractEvent} if a long enough time has passed since the last time it morphed. This
+ * cooldown is implemented through an {@link NBTTag} lastActivationTimeTag, which stores the epoch seconds that the
+ * PaladinsBlade last morphed into a HolyStrike.
+ */
 public class PaladinsBlade extends ConfigMorphableRelic implements TriggerOnInteractRelic, NBTStorageRelic {
 
     private final String COOLDOWN_IN_SECONDS_KEY = "uniqueProperties.cooldown_in_seconds";

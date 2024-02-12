@@ -6,17 +6,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.persistence.PersistentDataType;
+import world.sc2.command.Command;
 import world.sc2.config.Config;
 import world.sc2.config.ConfigManager;
 import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
+import world.sc2.shadowcraftrelics.relics.morphable_relic.ConfigMorphableRelic;
 import world.sc2.utility.ChatUtils;
 import world.sc2.utility.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateConfigMorphableRelicChainCommand extends world.sc2.command.Command {
+/**
+ * A {@link Command} for merging multiple Relic states into one singular {@link ConfigMorphableRelic}. Debug command.
+ */
+public class CreateConfigMorphableRelicChainCommand extends Command {
 
     private static final String MORPHABLE_RELIC_DATA_DIRECTORY = "data/morphableRelics/";
     private static final String RELIC_STATE_LIST_CONFIG_KEY = "relicStates";
