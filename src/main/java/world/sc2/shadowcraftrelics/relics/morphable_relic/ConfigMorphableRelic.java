@@ -16,7 +16,15 @@ import world.sc2.utility.ItemUtils;
 import java.util.List;
 
 /**
- * An implementation of the {@link MorphableRelic} interface
+ * An implementation of the {@link MorphableRelic} interface. This implementation uses several {@link Config}s to store
+ * information about the various states of a MorphableRelic. Every {@link ItemStack} state of a ConfigMorphableRelic
+ * contains two {@link NBTTag}s: the morphConfigID tag and the morphIndex tag.
+ * <p>
+ * The morphConfigID tag points to a Config in the plugin's data directory that contains a list of states for that
+ * ConfigMorphableRelic
+ * <p>
+ * The morphIndex tag contains an index [0, list.size()-1] that denotes which index in the state list the current state
+ * is
  */
 public abstract class ConfigMorphableRelic extends Relic implements MorphableRelic, NBTStorageRelic {
 

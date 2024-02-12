@@ -10,6 +10,10 @@ import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 
+/**
+ * A {@link ConfigMorphableRelic} with the special property to morph into its next state upon right click. Worldbreakers
+ * have three separate states - That of a pickaxe, an axe, and of a shovel.
+ */
 public class Worldbreaker extends ConfigMorphableRelic implements TriggerOnInteractRelic {
 
     public Worldbreaker(String name, Config config, ConfigManager configManager, NBTTag<String, String> morphConfigIDTag, NBTTag<Integer, Integer> morphIndexTag) {

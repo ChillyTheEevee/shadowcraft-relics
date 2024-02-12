@@ -4,10 +4,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import world.sc2.config.ConfigManager;
 import world.sc2.nbt.NBTTag;
-import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.morphable_relic.*;
@@ -24,20 +24,25 @@ import java.util.stream.Collectors;
 
 /**
  * A class used for managing the various {@link Relic} classes in SC2. Contains several functions for accessing data on
- * and manipulating these relics.
+ * and manipulating Relics.
  * @author ChillyTheEevee
  */
 public class RelicManager {
 
     // Dependencies
-    private final ShadowcraftRelics plugin;
+    private final JavaPlugin plugin;
     private final ConfigManager configManager;
 
     // Properties
     private final NBTTag relicTypeTag;
     private final ArrayList<Relic> allRelics;
 
-    public RelicManager(ShadowcraftRelics plugin, ConfigManager configManager) {
+    /**
+     * Constructs a new RelicManager for the given plugin and ConfigManager
+     * @param plugin The Plugin that this RelicManager belongs to
+     * @param configManager The ConfigManager that belongs to the plugin
+     */
+    public RelicManager(JavaPlugin plugin, ConfigManager configManager) {
         this.plugin = plugin;
         this.configManager = configManager;
 
@@ -47,66 +52,6 @@ public class RelicManager {
 
         allRelics = new ArrayList<>();
         registerRelics();
-    }
-
-    private void registerRelics() {
-        // Relics
-        registerRelic(new SimonObliterator("simon_obliterator",
-                configManager.getConfig("relicProperties/simon_obliterator.yml")));
-        registerRelic(new Voidwalkers("voidwalkers",
-                configManager.getConfig("relicProperties/voidwalkers.yml"), plugin));
-        registerRelic(new ForbiddenFruit("forbidden_fruit",
-                configManager.getConfig("relicProperties/forbidden_fruit.yml")));
-
-        // Morphable Relics
-        NBTTag<String, String> morphConfigIDTag = new NBTTag<>(new NamespacedKey(plugin, "morphConfigID"),
-                PersistentDataType.STRING);
-        NBTTag<Integer, Integer> morphIndexTag = new NBTTag<>(new NamespacedKey(plugin, "morphIndex"),
-        PersistentDataType.INTEGER);
-
-        registerRelic(new Purger("purger", configManager.getConfig("relicProperties/purger.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
-
-        // Paladin's blade
-        NBTTag<Long, Long> lastActivationTimeTag = new NBTTag<>(new NamespacedKey(plugin, "lastActivationTime"),
-                PersistentDataType.LONG, 0L);
-        registerRelic(new PaladinsBlade("paladins_blade",
-                configManager.getConfig("relicProperties/paladins_blade.yml"),
-                configManager, morphConfigIDTag, morphIndexTag, lastActivationTimeTag));
-
-        registerRelic(new HolyStrike("holy_strike",
-                configManager.getConfig("relicProperties/holy_strike.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
-
-        // Forerunner's Testament
-        registerRelic(new ForerunnersTestament("forerunners_testament",
-                configManager.getConfig("relicProperties/forerunnerstestament.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
-
-        // Foreign Forged Blade
-        registerRelic(new ForeignForgedBlade("foreign_forged_blade",
-                configManager.getConfig("relicProperties/foreign_forged_blade.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
-
-        // Multitool
-        registerRelic(new Multitool("multitool",
-                configManager.getConfig("relicProperties/multitool.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
-
-        // Worldbreaker
-        registerRelic(new Worldbreaker("worldbreaker",
-                configManager.getConfig("relicProperties/worldbreaker.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
-    }
-
-    /**
-     * Registers the specified {@link Relic} with this RelicManager if it is enabled.
-     * @param relic The relic to register
-     */
-    private void registerRelic(Relic relic) {
-        if (relic.isEnabled()) {
-            allRelics.add(relic);
-        }
     }
 
     /**
@@ -178,8 +123,76 @@ public class RelicManager {
         }
     }
 
+    /**
+     * Returns all registered Relics matching the predicate filter
+     * @param filter The Predicate in which to test
+     * @return A Collection of Relics that match the filter provided
+     */
     public Collection<Relic> getRelicsMatchingFilter(Predicate<Relic> filter) {
         return allRelics.stream().filter(filter).distinct().collect(Collectors.toList());
+    }
+
+    /**
+     * Registers all enabled Relics with this RelicManager.
+     */
+    private void registerRelics() {
+        // Relics
+        registerRelic(new SimonObliterator("simon_obliterator",
+                configManager.getConfig("relicProperties/simon_obliterator.yml")));
+        registerRelic(new Voidwalkers("voidwalkers",
+                configManager.getConfig("relicProperties/voidwalkers.yml"), plugin));
+        registerRelic(new ForbiddenFruit("forbidden_fruit",
+                configManager.getConfig("relicProperties/forbidden_fruit.yml")));
+
+        // Morphable Relics
+        NBTTag<String, String> morphConfigIDTag = new NBTTag<>(new NamespacedKey(plugin, "morphConfigID"),
+                PersistentDataType.STRING);
+        NBTTag<Integer, Integer> morphIndexTag = new NBTTag<>(new NamespacedKey(plugin, "morphIndex"),
+                PersistentDataType.INTEGER);
+
+        registerRelic(new Purger("purger", configManager.getConfig("relicProperties/purger.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Paladin's blade
+        NBTTag<Long, Long> lastActivationTimeTag = new NBTTag<>(new NamespacedKey(plugin, "lastActivationTime"),
+                PersistentDataType.LONG, 0L);
+        registerRelic(new PaladinsBlade("paladins_blade",
+                configManager.getConfig("relicProperties/paladins_blade.yml"),
+                configManager, morphConfigIDTag, morphIndexTag, lastActivationTimeTag));
+
+        registerRelic(new HolyStrike("holy_strike",
+                configManager.getConfig("relicProperties/holy_strike.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Forerunner's Testament
+        registerRelic(new ForerunnersTestament("forerunners_testament",
+                configManager.getConfig("relicProperties/forerunnerstestament.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Foreign Forged Blade
+        registerRelic(new ForeignForgedBlade("foreign_forged_blade",
+                configManager.getConfig("relicProperties/foreign_forged_blade.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Multitool
+        registerRelic(new Multitool("multitool",
+                configManager.getConfig("relicProperties/multitool.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+
+        // Worldbreaker
+        registerRelic(new Worldbreaker("worldbreaker",
+                configManager.getConfig("relicProperties/worldbreaker.yml"),
+                configManager, morphConfigIDTag, morphIndexTag));
+    }
+
+    /**
+     * Registers the specified {@link Relic} with this RelicManager if it is enabled.
+     * @param relic The relic to register
+     */
+    private void registerRelic(Relic relic) {
+        if (relic.isEnabled()) {
+            allRelics.add(relic);
+        }
     }
 
 }

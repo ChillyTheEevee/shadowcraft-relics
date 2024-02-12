@@ -13,6 +13,12 @@ import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
 import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 
+/**
+ * A {@link ConfigMorphableRelic} that has the special property of morphing between two separate states - sword state
+ * and bow state - to best reflect the situation. A Purger morphs from bow state to sword state when used to attack
+ * in a {@link EntityDamageByEntityEvent} or when held and left-clicked in a {@link PlayerInteractEvent}. A Purger
+ * transitions from sword state back to bow state upon right click in a PlayerInteractEvent.
+ */
 public class Purger extends ConfigMorphableRelic implements TriggerOnInteractRelic, TriggerOnDirectAttackRelic {
 
     public Purger(String name, Config config, ConfigManager configManager, NBTTag<String, String> morphConfigIDTag, NBTTag<Integer, Integer> morphIndexTag) {

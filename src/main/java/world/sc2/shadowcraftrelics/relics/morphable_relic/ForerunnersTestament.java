@@ -10,6 +10,10 @@ import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
 
+/**
+ * A {@link ConfigMorphableRelic} that has the special property of switching states every time it is used to attack
+ * in an EntityDamageByEntityEvent.
+ */
 public class ForerunnersTestament extends ConfigMorphableRelic implements TriggerOnDirectAttackRelic {
 
     public ForerunnersTestament(String name, Config config, ConfigManager configManager, NBTTag<String, String> morphConfigIDTag, NBTTag<Integer, Integer> morphIndexTag) {
