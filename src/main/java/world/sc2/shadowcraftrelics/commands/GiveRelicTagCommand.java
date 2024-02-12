@@ -64,11 +64,11 @@ public class GiveRelicTagCommand extends Command {
     public List<String> onTabComplete(CommandSender sender, String[] args) {
         if (args.length != 2)
             return null;
-        Collection<Relic> allRelics = relicManager.getRelicsMatchingFilter(r -> true);
-        ArrayList<String> allRelicNames = new ArrayList<>();
-        for (Relic relic : allRelics) {
-            allRelicNames.add(relic.getName());
+        Collection<Relic> validRelics = relicManager.getRelicsMatchingFilter(r -> r.getName().contains(args[1]));
+        ArrayList<String> validRelicNames = new ArrayList<>();
+        for (Relic relic : validRelics) {
+            validRelicNames.add(relic.getName());
         }
-        return allRelicNames;
+        return validRelicNames;
     }
 }
