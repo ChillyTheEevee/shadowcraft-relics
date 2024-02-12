@@ -38,15 +38,13 @@ public class PaladinsBlade extends ConfigMorphableRelic implements TriggerOnInte
 
             Long previousTime = lastActivationTimeTag.getStoredData(paladinsBlade);
 
-            if (previousTime == null) {
-                previousTime = 0L;
-            }
-
             long deltaTime = currentTime - previousTime;
 
             long cooldownInSeconds = config.get().getLong(COOLDOWN_IN_SECONDS_KEY);
 
             if (deltaTime >= cooldownInSeconds) {
+                lastActivationTimeTag.applyTag(paladinsBlade, currentTime);
+
                 RelicMorphEvent relicMorphEvent = new RelicMorphEvent(player, paladinsBlade, equipmentSlot);
                 morph(relicMorphEvent);
             }
@@ -56,11 +54,11 @@ public class PaladinsBlade extends ConfigMorphableRelic implements TriggerOnInte
     @Override
     public NBTTag[] getRelicNBTTags() {
         NBTTag[] parentNBTTags = super.getRelicNBTTags();
-        NBTTag[] nbtTags = new NBTTag[parentNBTTags.length+1];
+        NBTTag[] nbtTags = new NBTTag[parentNBTTags.length + 1];
 
         System.arraycopy(parentNBTTags, 0, nbtTags, 0, parentNBTTags.length);
 
-        nbtTags[parentNBTTags.length-1] = lastActivationTimeTag;
+        nbtTags[nbtTags.length-1] = lastActivationTimeTag;
         return nbtTags;
     }
 }
