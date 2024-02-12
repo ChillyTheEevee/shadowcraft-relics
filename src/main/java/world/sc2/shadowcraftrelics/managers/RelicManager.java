@@ -69,12 +69,13 @@ public class RelicManager {
 
         // Paladin's blade
         NBTTag<Long, Long> lastActivationTimeTag = new NBTTag<>(new NamespacedKey(plugin, "lastActivationTime"),
-                PersistentDataType.LONG);
+                PersistentDataType.LONG, 0L);
         registerRelic(new PaladinsBlade("paladins_blade",
                 configManager.getConfig("relicProperties/paladins_blade.yml"),
                 configManager, morphConfigIDTag, morphIndexTag, lastActivationTimeTag));
 
-        registerRelic(new HolyStrike("holy_strike", configManager.getConfig("relicProperties/holy_strike"),
+        registerRelic(new HolyStrike("holy_strike",
+                configManager.getConfig("relicProperties/holy_strike.yml"),
                 configManager, morphConfigIDTag, morphIndexTag));
 
         // Forerunner's Testament
