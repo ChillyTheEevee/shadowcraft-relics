@@ -3,7 +3,7 @@ package world.sc2.shadowcraftrelics.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import world.sc2.command.Command;
+import world.sc2.command.subcommand.Subcommand;
 import world.sc2.config.Config;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
@@ -15,10 +15,10 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * A {@link Command} that has the primary purpose of granting relic tags to ItemStacks.
+ * A {@link Subcommand} that has the primary purpose of granting relic tags to ItemStacks.
  * @author ChillyTheEevee
  */
-public class GiveRelicTagCommand extends Command {
+public class GiveRelicTagCommand extends Subcommand {
 
     private final static String APPLICATION_SUCCESSFUL_KEY = "messages.application_successful";
     private final static String WARNING_NON_PLAYER_SENDER_KEY = "messages.warning_non_player_sender";

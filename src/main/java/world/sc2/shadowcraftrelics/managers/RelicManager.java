@@ -18,6 +18,7 @@ import world.sc2.utility.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -35,7 +36,7 @@ public class RelicManager {
 
     // Properties
     private final NBTTag relicTypeTag;
-    private final ArrayList<Relic> allRelics;
+    private final List<Relic> allRelics;
 
     /**
      * Constructs a new RelicManager for the given plugin and ConfigManager

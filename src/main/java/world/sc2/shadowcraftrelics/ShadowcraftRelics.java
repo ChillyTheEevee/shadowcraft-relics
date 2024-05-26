@@ -1,7 +1,7 @@
 package world.sc2.shadowcraftrelics;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import world.sc2.command.CommandManager;
+import world.sc2.command.subcommand.SubcommandManager;
 import world.sc2.config.ConfigManager;
 import world.sc2.shadowcraftrelics.commands.CreateConfigMorphableRelicChainCommand;
 import world.sc2.shadowcraftrelics.commands.GiveRelicTagCommand;
@@ -16,7 +16,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
 
     // Managers
     private ConfigManager configManager;
-    private CommandManager commandManager;
+    private SubcommandManager commandManager;
     private RelicManager relicManager;
 
     @Override
@@ -25,7 +25,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
 
         // Create managers
         configManager = new ConfigManager(this);
-        commandManager = new CommandManager(this, configManager);
+        commandManager = new SubcommandManager(this, configManager);
         relicManager = new RelicManager(this, configManager);
 
 
@@ -37,9 +37,9 @@ public final class ShadowcraftRelics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(relicManager), this);
 
         // Register commands
-        commandManager.addCommand("giverelictag",
+        commandManager.registerSubcommand("giverelictag",
                 new GiveRelicTagCommand(configManager.getConfig("commands/giverelictag.yml"), relicManager));
-        commandManager.addCommand("createconfigmorphablerelicchain",
+        commandManager.registerSubcommand("createconfigmorphablerelicchain",
                 new CreateConfigMorphableRelicChainCommand(
                         configManager.getConfig("commands/createconfigmorphablerelicchain.yml"), this,
                         configManager));
