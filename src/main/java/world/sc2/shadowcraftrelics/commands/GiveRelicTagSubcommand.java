@@ -18,7 +18,7 @@ import java.util.List;
  * A {@link Subcommand} that has the primary purpose of granting relic tags to ItemStacks.
  * @author ChillyTheEevee
  */
-public class GiveRelicTagCommand extends Subcommand {
+public class GiveRelicTagSubcommand extends Subcommand {
 
     private final static String APPLICATION_SUCCESSFUL_KEY = "messages.application_successful";
     private final static String WARNING_NON_PLAYER_SENDER_KEY = "messages.warning_non_player_sender";
@@ -26,7 +26,7 @@ public class GiveRelicTagCommand extends Subcommand {
     private final static String WARNING_INVALID_RELIC_TAG_KEY = "messages.warning_invalid_relic_tag";
     private final RelicManager relicManager;
 
-    public GiveRelicTagCommand(Config config, RelicManager relicManager) {
+    public GiveRelicTagSubcommand(Config config, RelicManager relicManager) {
         super(config);
         this.relicManager = relicManager;
     }

@@ -15,12 +15,12 @@ import world.sc2.shadowcraftrelics.managers.RelicManager;
 import static org.mockito.Mockito.*;
 
 
-class GiveRelicTagCommandTest {
+class GiveRelicTagSubcommandTest {
 
     @Mock
     Player mockPlayerCommandSender;
 
-    private GiveRelicTagCommand giveRelicTagCommand;
+    private GiveRelicTagSubcommand giveRelicTagSubcommand;
 
     @BeforeEach
     public void setup() {
@@ -40,7 +40,7 @@ class GiveRelicTagCommandTest {
         RelicManager mockRelicManager = Mockito.mock(RelicManager.class);
         Config mockConfig = Mockito.mock(Config.class);
 
-        giveRelicTagCommand = new GiveRelicTagCommand(mockConfig, mockRelicManager);
+        giveRelicTagSubcommand = new GiveRelicTagSubcommand(mockConfig, mockRelicManager);
     }
 
     @DisplayName("onCommand(): If a Player CommandSender gives a wrong relic tag, do not change their held item")
@@ -50,7 +50,7 @@ class GiveRelicTagCommandTest {
 
         String[] args = {"purger"};
 
-        giveRelicTagCommand.onCommand(mockPlayerCommandSender, args);
+        giveRelicTagSubcommand.onCommand(mockPlayerCommandSender, args);
 
         verify(mockHeldItem, never()).setItemMeta(null);
     }

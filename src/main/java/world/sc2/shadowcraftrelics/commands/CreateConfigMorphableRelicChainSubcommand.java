@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * A {@link Subcommand} for merging multiple Relic states into one singular {@link ConfigMorphableRelic}. Debug command.
  */
-public class CreateConfigMorphableRelicChainCommand extends Subcommand {
+public class CreateConfigMorphableRelicChainSubcommand extends Subcommand {
 
     private static final String MORPHABLE_RELIC_DATA_DIRECTORY = "data/morphableRelics/";
     private static final String RELIC_STATE_LIST_CONFIG_KEY = "relicStates";
@@ -39,7 +39,7 @@ public class CreateConfigMorphableRelicChainCommand extends Subcommand {
     private final NBTTag<String, String> morphConfigIDTag;
     private final NBTTag<Integer, Integer> morphIndexTag;
 
-    public CreateConfigMorphableRelicChainCommand(Config config, ShadowcraftRelics plugin, ConfigManager configManager) {
+    public CreateConfigMorphableRelicChainSubcommand(Config config, ShadowcraftRelics plugin, ConfigManager configManager) {
         super(config);
 
         morphConfigIDTag = new NBTTag<>(new NamespacedKey(plugin, "morphConfigID"),

@@ -3,8 +3,8 @@ package world.sc2.shadowcraftrelics;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.sc2.command.subcommand.SubcommandManager;
 import world.sc2.config.ConfigManager;
-import world.sc2.shadowcraftrelics.commands.CreateConfigMorphableRelicChainCommand;
-import world.sc2.shadowcraftrelics.commands.GiveRelicTagCommand;
+import world.sc2.shadowcraftrelics.commands.CreateConfigMorphableRelicChainSubcommand;
+import world.sc2.shadowcraftrelics.commands.GiveRelicTagSubcommand;
 import world.sc2.shadowcraftrelics.listeners.*;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 
@@ -38,9 +38,9 @@ public final class ShadowcraftRelics extends JavaPlugin {
 
         // Register commands
         commandManager.registerSubcommand("giverelictag",
-                new GiveRelicTagCommand(configManager.getConfig("commands/giverelictag.yml"), relicManager));
+                new GiveRelicTagSubcommand(configManager.getConfig("commands/giverelictag.yml"), relicManager));
         commandManager.registerSubcommand("createconfigmorphablerelicchain",
-                new CreateConfigMorphableRelicChainCommand(
+                new CreateConfigMorphableRelicChainSubcommand(
                         configManager.getConfig("commands/createconfigmorphablerelicchain.yml"), this,
                         configManager));
 
