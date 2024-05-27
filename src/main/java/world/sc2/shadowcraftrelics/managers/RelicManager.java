@@ -146,44 +146,37 @@ public class RelicManager {
                 configManager.getConfig("relicProperties/forbidden_fruit.yml")));
 
         // Morphable Relics
-        NBTTag<String, String> morphConfigIDTag = new NBTTag<>(new NamespacedKey(plugin, "morphConfigID"),
-                PersistentDataType.STRING);
-        NBTTag<Integer, Integer> morphIndexTag = new NBTTag<>(new NamespacedKey(plugin, "morphIndex"),
-                PersistentDataType.INTEGER);
+        NBTTag<byte[], byte[]> morphableRelicQueueTag =
+                new NBTTag<>(new NamespacedKey(plugin, "morphableRelicQueue"), PersistentDataType.BYTE_ARRAY);
 
         registerRelic(new Purger("purger", configManager.getConfig("relicProperties/purger.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
+                morphableRelicQueueTag));
 
         // Paladin's blade
         NBTTag<Long, Long> lastActivationTimeTag = new NBTTag<>(new NamespacedKey(plugin, "lastActivationTime"),
                 PersistentDataType.LONG, 0L);
         registerRelic(new PaladinsBlade("paladins_blade",
-                configManager.getConfig("relicProperties/paladins_blade.yml"),
-                configManager, morphConfigIDTag, morphIndexTag, lastActivationTimeTag));
+                configManager.getConfig("relicProperties/paladins_blade.yml"), morphableRelicQueueTag,
+                lastActivationTimeTag));
 
         registerRelic(new HolyStrike("holy_strike",
-                configManager.getConfig("relicProperties/holy_strike.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
+                configManager.getConfig("relicProperties/holy_strike.yml"), morphableRelicQueueTag));
 
         // Forerunner's Testament
         registerRelic(new ForerunnersTestament("forerunners_testament",
-                configManager.getConfig("relicProperties/forerunnerstestament.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
+                configManager.getConfig("relicProperties/forerunnerstestament.yml"), morphableRelicQueueTag));
 
         // Foreign Forged Blade
         registerRelic(new ForeignForgedBlade("foreign_forged_blade",
-                configManager.getConfig("relicProperties/foreign_forged_blade.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
+                configManager.getConfig("relicProperties/foreign_forged_blade.yml"), morphableRelicQueueTag));
 
         // Multitool
         registerRelic(new Multitool("multitool",
-                configManager.getConfig("relicProperties/multitool.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
+                configManager.getConfig("relicProperties/multitool.yml"), morphableRelicQueueTag));
 
         // Worldbreaker
         registerRelic(new Worldbreaker("worldbreaker",
-                configManager.getConfig("relicProperties/worldbreaker.yml"),
-                configManager, morphConfigIDTag, morphIndexTag));
+                configManager.getConfig("relicProperties/worldbreaker.yml"), morphableRelicQueueTag));
     }
 
     /**

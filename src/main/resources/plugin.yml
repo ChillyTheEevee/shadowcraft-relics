@@ -20,6 +20,6 @@ permissions:
   shadowcraftrelics.giverelictag:
     description: Grants the player the ability to use the /relics giverelictag command
     default: op
-  shadowcraftrelics.createconfigmorphablerelicchain:
-    description: Grants the player the ability to use the /relics createconfigmorphablerelicchain command
+  shadowcraftrelics.createmorphablerelicchain:
+    description: Grants the player the ability to use the /relics createmorphablerelicchain command
     default: op

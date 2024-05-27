@@ -7,22 +7,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import world.sc2.config.Config;
-import world.sc2.config.ConfigManager;
 import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
 import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 
 /**
- * A {@link ConfigMorphableRelic} that has the special property of morphing between two separate states - sword state
+ * A {@link MorphableRelic} that has the special property of morphing between two separate states - sword state
  * and bow state - to best reflect the situation. A Purger morphs from bow state to sword state when used to attack
  * in a {@link EntityDamageByEntityEvent} or when held and left-clicked in a {@link PlayerInteractEvent}. A Purger
  * transitions from sword state back to bow state upon right click in a PlayerInteractEvent.
  */
-public class Purger extends ConfigMorphableRelic implements TriggerOnInteractRelic, TriggerOnDirectAttackRelic {
+public class Purger extends NBTMorphableRelic implements TriggerOnInteractRelic, TriggerOnDirectAttackRelic {
 
-    public Purger(String name, Config config, ConfigManager configManager, NBTTag<String, String> morphConfigIDTag, NBTTag<Integer, Integer> morphIndexTag) {
-        super(name, config, configManager, morphConfigIDTag, morphIndexTag);
+    public Purger(String name, Config config, NBTTag<byte[], byte[]> morphableRelicQueueTag) {
+        super(name, config, morphableRelicQueueTag);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class Purger extends ConfigMorphableRelic implements TriggerOnInteractRel
         if ((currentPurger.getType() == Material.BOW && event.getAction().isLeftClick())
         || (currentPurger.getType() != Material.BOW && event.getAction().isRightClick())) {
             RelicMorphEvent relicMorphEvent = new RelicMorphEvent(player, currentPurger, equipmentSlot);
-            morph(relicMorphEvent);
+            relicMorphEvent.callEvent();
         }
     }
 
@@ -47,7 +46,7 @@ public class Purger extends ConfigMorphableRelic implements TriggerOnInteractRel
 
         if (currentPurger.getType() == Material.BOW) {
             RelicMorphEvent relicMorphEvent = new RelicMorphEvent(player, currentPurger, equipmentSlot);
-            morph(relicMorphEvent);
+            relicMorphEvent.callEvent();
         }
     }
 

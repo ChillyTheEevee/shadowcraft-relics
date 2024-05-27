@@ -57,4 +57,9 @@ public class RelicMorphEvent extends Event {
     public EquipmentSlot getEquipmentSlot() {
         return equipmentSlot;
     }
+
+    // This is required, don't touch it
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
 }
