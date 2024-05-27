@@ -1,0 +1,10 @@
+description: "Creates a morphable relic using the items in the sender's hotbar as the list. Debug command."
+usage: "/relics createmorphablerelicchain"
+permission:
+  - "shadowcraftrelics.createmorphablerelicchain"
+
+messages:
+  success: "&aSuccessfully created a morphable relic from the items provided!"
+
+  warning_non_player_sender: "&cOnly players can use this command!"
+  warning_invalid_number_of_items: "&cYou must have at least two items to merge into a morphable relic in your hotbar."

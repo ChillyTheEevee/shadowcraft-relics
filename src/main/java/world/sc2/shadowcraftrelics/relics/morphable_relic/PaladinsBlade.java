@@ -5,7 +5,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import world.sc2.config.Config;
-import world.sc2.config.ConfigManager;
 import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
@@ -14,21 +13,19 @@ import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 import java.time.Instant;
 
 /**
- * A {@link ConfigMorphableRelic} that has the special property of morphing into a {@link HolyStrike} when used to
+ * A {@link MorphableRelic} that has the special property of morphing into a {@link HolyStrike} when used to
  * right-click in a {@link PlayerInteractEvent} if a long enough time has passed since the last time it morphed. This
  * cooldown is implemented through an {@link NBTTag} lastActivationTimeTag, which stores the epoch seconds that the
  * PaladinsBlade last morphed into a HolyStrike.
  */
-public class PaladinsBlade extends ConfigMorphableRelic implements TriggerOnInteractRelic, NBTStorageRelic {
+public class PaladinsBlade extends NBTMorphableRelic implements TriggerOnInteractRelic, NBTStorageRelic {
 
     private final String COOLDOWN_IN_SECONDS_KEY = "uniqueProperties.cooldown_in_seconds";
     private final NBTTag<Long, Long> lastActivationTimeTag;
 
-    public PaladinsBlade(String name, Config config, ConfigManager configManager,
-                         NBTTag<String, String> morphConfigIDTag, NBTTag<Integer, Integer> morphIndexTag,
+    public PaladinsBlade(String name, Config config, NBTTag<byte[], byte[]> morphableRelicQueueTag,
                          NBTTag<Long, Long> lastActivationTimeTag) {
-        super(name, config, configManager, morphConfigIDTag, morphIndexTag);
-
+        super(name, config, morphableRelicQueueTag);
         this.lastActivationTimeTag = lastActivationTimeTag;
     }
 
@@ -52,7 +49,7 @@ public class PaladinsBlade extends ConfigMorphableRelic implements TriggerOnInte
                 lastActivationTimeTag.applyTag(paladinsBlade, currentTime);
 
                 RelicMorphEvent relicMorphEvent = new RelicMorphEvent(player, paladinsBlade, equipmentSlot);
-                morph(relicMorphEvent);
+                relicMorphEvent.callEvent();
             }
         }
     }

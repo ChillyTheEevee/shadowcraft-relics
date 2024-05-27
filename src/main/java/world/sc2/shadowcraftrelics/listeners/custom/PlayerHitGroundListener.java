@@ -1,6 +1,7 @@
-package world.sc2.shadowcraftrelics.listeners;
+package world.sc2.shadowcraftrelics.listeners.custom;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EntityEquipment;
 import world.sc2.shadowcraftrelics.events.PlayerHitGroundEvent;
@@ -18,7 +19,7 @@ public class PlayerHitGroundListener implements Listener {
         this.relicManager = relicManager;
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.MONITOR)
     public void onEntityHitGroundEvent(PlayerHitGroundEvent event) {
 
         EntityEquipment playerEquipment = event.getPlayer().getEquipment();

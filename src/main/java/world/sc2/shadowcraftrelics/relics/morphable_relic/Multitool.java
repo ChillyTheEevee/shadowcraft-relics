@@ -5,19 +5,18 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import world.sc2.config.Config;
-import world.sc2.config.ConfigManager;
 import world.sc2.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.on_interact.TriggerOnInteractRelic;
 
 /**
- * A {@link ConfigMorphableRelic} with the special property to morph into its next state upon right click. Multitools
+ * A {@link MorphableRelic} with the special property to morph into its next state upon right click. Multitools
  * have three separate states - That of a pickaxe, an axe, and of a shovel.
  */
-public class Multitool extends ConfigMorphableRelic implements TriggerOnInteractRelic {
+public class Multitool extends NBTMorphableRelic implements TriggerOnInteractRelic {
 
-    public Multitool(String name, Config config, ConfigManager configManager, NBTTag<String, String> morphConfigIDTag, NBTTag<Integer, Integer> morphIndexTag) {
-        super(name, config, configManager, morphConfigIDTag, morphIndexTag);
+    public Multitool(String name, Config config, NBTTag<byte[], byte[]> morphableRelicQueueTag) {
+        super(name, config, morphableRelicQueueTag);
     }
 
     @Override
@@ -29,7 +28,7 @@ public class Multitool extends ConfigMorphableRelic implements TriggerOnInteract
 
         if (event.getAction().isRightClick()) {
             RelicMorphEvent relicMorphEvent = new RelicMorphEvent(player, currentMultiool, equipmentSlot);
-            morph(relicMorphEvent);
+            relicMorphEvent.callEvent();
         }
     }
 
