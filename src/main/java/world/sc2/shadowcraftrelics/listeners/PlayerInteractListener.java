@@ -1,6 +1,8 @@
 package world.sc2.shadowcraftrelics.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -23,6 +25,11 @@ public class PlayerInteractListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getHand() == EquipmentSlot.HAND) {
             // Relics that implement TriggerOnInteractRelic
+            Bukkit.getLogger().info("PlayerInteractEvent called for main hand."); // todo remove debugging code
+            Bukkit.getLogger().info("Action: " + event.getAction());
+            Bukkit.getLogger().info("Player: " + event.getPlayer());
+            Bukkit.getLogger().info("EventName: " + event.getEventName());
+            Bukkit.getLogger().info("Material: " + event.getMaterial()); // todo remove debugging code
             ItemStack itemInMainHand = event.getPlayer().getInventory().getItemInMainHand();
             Relic relic = relicManager.getRelicType(itemInMainHand);
             if (relic instanceof TriggerOnInteractRelic triggerOnInteractRelic) {

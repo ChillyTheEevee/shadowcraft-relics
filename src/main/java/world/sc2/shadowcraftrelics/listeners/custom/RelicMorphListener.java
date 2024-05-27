@@ -1,5 +1,6 @@
 package world.sc2.shadowcraftrelics.listeners.custom;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -21,6 +22,7 @@ public class RelicMorphListener implements Listener {
         ItemStack morphableRelic = event.getCurrentRelicState();
         assert relicManager.getRelicType(morphableRelic) instanceof MorphableRelic;
         ((MorphableRelic) relicManager.getRelicType(morphableRelic)).morph(event);
+        Bukkit.getLogger().warning("Relic morphed into next state!"); // todo remove debugging code
     }
 
 }
