@@ -36,6 +36,7 @@ public final class ShadowcraftRelics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(relicManager), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveListener(relicManager), this);
         getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(relicManager), this);
+        getServer().getPluginManager().registerEvents(new EntityDeathListener(relicManager), this);
 
         // Register custom listeners
         getServer().getPluginManager().registerEvents(new PlayerHitGroundListener(relicManager), this);

@@ -13,6 +13,7 @@ import world.sc2.shadowcraftrelics.relics.Relic;
 import world.sc2.shadowcraftrelics.relics.morphable_relic.*;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 import world.sc2.shadowcraftrelics.relics.on_consume.ForbiddenFruit;
+import world.sc2.shadowcraftrelics.relics.on_death.IcarusBane;
 import world.sc2.shadowcraftrelics.relics.on_move.Voidwalkers;
 import world.sc2.utility.ItemUtils;
 
@@ -144,6 +145,8 @@ public class RelicManager {
                 configManager.getConfig("relicProperties/voidwalkers.yml"), plugin));
         registerRelic(new ForbiddenFruit("forbidden_fruit",
                 configManager.getConfig("relicProperties/forbidden_fruit.yml")));
+        registerRelic(new IcarusBane("icarus_bane",
+                configManager.getConfig("relicProperties/icarus_bane.yml")));
 
         // Morphable Relics
         NBTTag<byte[], byte[]> morphableRelicQueueTag =
