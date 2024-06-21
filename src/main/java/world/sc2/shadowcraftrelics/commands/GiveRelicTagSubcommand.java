@@ -3,12 +3,12 @@ package world.sc2.shadowcraftrelics.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import world.sc2.command.subcommand.Subcommand;
-import world.sc2.config.Config;
+import live.chillytheeevee.chillylib.command.subcommand.Subcommand;
+import live.chillytheeevee.chillylib.config.Config;
 import world.sc2.shadowcraftrelics.managers.RelicManager;
 import world.sc2.shadowcraftrelics.relics.Relic;
-import world.sc2.utility.ChatUtils;
-import world.sc2.utility.ItemUtils;
+import live.chillytheeevee.chillylib.utility.ChatUtils;
+import live.chillytheeevee.chillylib.utility.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;

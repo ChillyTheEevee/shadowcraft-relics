@@ -1,8 +1,8 @@
 package world.sc2.shadowcraftrelics;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import world.sc2.command.subcommand.SubcommandManager;
-import world.sc2.config.ConfigManager;
+import live.chillytheeevee.chillylib.command.subcommand.SubcommandManager;
+import live.chillytheeevee.chillylib.config.ConfigManager;
 import world.sc2.shadowcraftrelics.commands.CreateMorphableRelicSubcommand;
 import world.sc2.shadowcraftrelics.commands.GiveRelicTagSubcommand;
 import world.sc2.shadowcraftrelics.listeners.*;

@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import world.sc2.config.Config;
+import live.chillytheeevee.chillylib.config.Config;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
 import java.util.Objects;
