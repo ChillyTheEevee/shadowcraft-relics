@@ -1,11 +1,11 @@
-# Edit properties specific to the Purger relic
+# Edit properties specific to the Worldbreaker relic
 
-displayName: Purger
+displayName: Worldbreaker
 isEnabled: True
 
 uniqueProperties:
 
-# Purger error messages
+# Worldbreaker error messages
 messages:
   warning_missing_index: "&cCurrent states does not have an index!"
   warning_stored_relic_states_null: "&cStored relic states are null!"

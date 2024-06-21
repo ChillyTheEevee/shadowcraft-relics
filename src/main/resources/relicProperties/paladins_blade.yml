@@ -1,11 +1,12 @@
-# Edit properties specific to the Purger relic
+# Edit properties specific to the Paladins Blade relic
 
-displayName: Purger
+displayName: Paladins Blade
 isEnabled: True
 
 uniqueProperties:
+  cooldown_in_seconds: 180
 
-# Purger error messages
+# Paladins blade error messages
 messages:
   warning_missing_index: "&cCurrent states does not have an index!"
   warning_stored_relic_states_null: "&cStored relic states are null!"

@@ -1,0 +1,18 @@
+# Edit properties specific to the Icarus Bane relic
+
+displayName: Icarus Bane
+isEnabled: True
+
+uniqueProperties:
+  item_to_drop_on_fall_damage_death:
+    ==: org.bukkit.inventory.ItemStack
+    v: 3578
+    type: MUSIC_DISC_PIGSTEP
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '{"italic":false,"color":"dark_red","text":"Icarus"}'
+      lore:
+        - '{"italic":false,"color":"dark_red","text":"Starset"}'
+      custom-model-data: 10000
+      internal: H4sIAAAAAAAA/+NiYOBi4MosSc0tTkxJSS3iYGDKTGFgK87PS4835GDgzEvMTS0uSExOZeDMrYwvzi/NSylmYAAAMEh+6TYAAAA=

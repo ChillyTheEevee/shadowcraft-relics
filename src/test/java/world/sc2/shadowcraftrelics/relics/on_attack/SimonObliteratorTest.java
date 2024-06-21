@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import world.sc2.shadowcraftrelics.config.Config;
+import live.chillytheeevee.chillylib.config.Config;
 
 import java.util.ArrayList;
 import java.util.List;

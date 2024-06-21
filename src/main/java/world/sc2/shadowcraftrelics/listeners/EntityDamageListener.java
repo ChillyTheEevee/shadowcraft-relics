@@ -13,6 +13,9 @@ import world.sc2.shadowcraftrelics.relics.on_attack.TriggerOnDirectAttackRelic;
 
 import java.util.Objects;
 
+/**
+ * A {@link Listener} for listening to both the {@link EntityDamageEvent} and the {@link EntityDamageByEntityEvent}.
+ */
 public class EntityDamageListener implements Listener {
 
     private final RelicManager relicManager;

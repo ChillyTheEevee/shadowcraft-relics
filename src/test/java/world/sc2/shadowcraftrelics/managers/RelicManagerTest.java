@@ -10,9 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import live.chillytheeevee.chillylib.config.Config;
+import live.chillytheeevee.chillylib.config.ConfigManager;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
-import world.sc2.shadowcraftrelics.config.Config;
-import world.sc2.shadowcraftrelics.config.ConfigManager;
 import world.sc2.shadowcraftrelics.relics.on_attack.SimonObliterator;
 
 import static org.junit.jupiter.api.Assertions.*;
