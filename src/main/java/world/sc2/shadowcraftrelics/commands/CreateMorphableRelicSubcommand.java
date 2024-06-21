@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.persistence.PersistentDataType;
-import world.sc2.command.subcommand.Subcommand;
-import world.sc2.config.Config;
-import world.sc2.nbt.NBTTag;
+import live.chillytheeevee.chillylib.command.subcommand.Subcommand;
+import live.chillytheeevee.chillylib.config.Config;
+import live.chillytheeevee.chillylib.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.ShadowcraftRelics;
 import world.sc2.shadowcraftrelics.relics.morphable_relic.MorphableRelic;
-import world.sc2.utility.ChatUtils;
-import world.sc2.utility.ItemUtils;
+import live.chillytheeevee.chillylib.utility.ChatUtils;
+import live.chillytheeevee.chillylib.utility.ItemUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

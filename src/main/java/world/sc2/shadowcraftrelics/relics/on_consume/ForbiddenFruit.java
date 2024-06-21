@@ -2,7 +2,7 @@ package world.sc2.shadowcraftrelics.relics.on_consume;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import world.sc2.config.Config;
+import live.chillytheeevee.chillylib.config.Config;
 import world.sc2.shadowcraftrelics.relics.Relic;
 
 /**

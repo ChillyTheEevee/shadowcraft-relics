@@ -3,12 +3,12 @@ package world.sc2.shadowcraftrelics.relics.morphable_relic;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import world.sc2.config.Config;
-import world.sc2.nbt.NBTTag;
+import live.chillytheeevee.chillylib.config.Config;
+import live.chillytheeevee.chillylib.nbt.NBTTag;
 import world.sc2.shadowcraftrelics.events.RelicMorphEvent;
 import world.sc2.shadowcraftrelics.relics.NBTStorageRelic;
 import world.sc2.shadowcraftrelics.relics.Relic;
-import world.sc2.utility.ItemUtils;
+import live.chillytheeevee.chillylib.utility.ItemUtils;
 
 import java.io.*;
 import java.util.LinkedList;

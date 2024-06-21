@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import world.sc2.config.Config;
+import live.chillytheeevee.chillylib.config.Config;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
